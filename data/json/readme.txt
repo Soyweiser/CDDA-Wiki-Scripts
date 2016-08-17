@@ -1,0 +1,1 @@
+Copy the .json files from https://github.com/CleverRaven/Cataclysm-DDA /data/json into this directory.
