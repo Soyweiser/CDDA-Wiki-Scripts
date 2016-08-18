@@ -4,6 +4,13 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
+#on start windows might lose focus for a second due to the Tkinter clipboard hack.
+#Use 'exit' to exit
+#Type in a positive int to convert a mutation at that location in the data list into the mediawiki code. Positioning over different versions of the json files is not guaranteed.
+#   The conversion is echoed, and automatically loaded in the clipboard. Just copy paste and edit into the wiki.
+#Enter a mutation ID to get the mutations location in the array. These are supposed to be permanent ID's.
+
+
 with open('data/json/mutations.json') as data_file:    
     data = json.load(data_file)
 
@@ -22,7 +29,65 @@ def ID_To_int(id):
         return ID_mut[id]["id_nr"]
     else:
         return -1
+
+def Attack_To_String(attack):
+    retval = list()
+    retval.append("* ")
+    if("required_mutations" in attack):
+        retval.append("if you also have the ")
+        for it in range(0, len(attack["required_mutations"])):
+            retval.append('[[')
+            retval.append(ID_To_String(attack["required_mutations"][it]))
+            retval.append(']]<!--')
+            retval.append(attack["required_mutations"][it])
+            retval.append('-->')
+            if(not(it+1 == len(attack["required_mutations"]))):
+                retval.append(", ")
+        retval.append(" mutation")
+        if(len(attack["required_mutations"]) > 1):
+            retval.append("s")
+        retval.append(", ")
     
+    if("blocker_mutations" in attack):
+        retval.append("unless you have the ")
+        for it in range(0, len(attack["blocker_mutations"])):
+            retval.append('[[')
+            retval.append(ID_To_String(attack["blocker_mutations"][it]))
+            retval.append(']]<!--')
+            retval.append(attack["blocker_mutations"][it])
+            retval.append('-->')
+            if(not(it+1 == len(attack["blocker_mutations"]))):
+                retval.append(", ")
+        retval.append(" mutation")
+        if(len(attack["blocker_mutations"]) > 1):
+            retval.append("s")
+        retval.append(", ")
+    
+    retval.append("this mutation gives an additional attack, with ")
+    retval.append(str(attack["chance"]))
+    retval.append("% chance of activating, using the ")
+    retval.append(attack["body_part"])
+    retval.append(" body part, doing ")
+    if (isinstance(attack["base_damage"], list)):
+        for it2 in range(0, len(attack["base_damage"])):
+            retval.append(str(attack["base_damage"][it2]["amount"]))
+            retval.append(" points of ")
+            retval.append(attack["base_damage"][it2]["damage_type"])
+            retval.append(" damage")
+            if(not(it2+1 == len(attack["base_damage"]))):
+                retval.append(", and ")
+        retval.append(".")
+        retval.append("\n")
+    else:
+        retval.append(str(attack["base_damage"]["amount"]))
+        retval.append(" points of ")
+        retval.append(attack["base_damage"]["damage_type"])
+        retval.append(" damage")
+        retval.append(".")
+        retval.append("\n")
+    return retval
+
+
 var = raw_input(">")
 while True:
     while var.isdigit():
@@ -31,160 +96,169 @@ while True:
             root.update()
             root.destroy()
             exit()
-        list = [ "{{trait|", data[var]["id"], '|', data[var]["name"], '|' ]
+        output = [ "{{trait|", data[var]["id"], '|', data[var]["name"], '|' ]
         
         if("prereqs" in data[var]):
-            list.append("PREREQS=")
+            output.append("PREREQS=")
             for it in range(0, len(data[var]["prereqs"])):
-                list.append('[[')
-                list.append(ID_To_String(data[var]["prereqs"][it]))
-                list.append(']]<!--')
-                list.append(data[var]["prereqs"][it])
-                list.append('-->')
+                output.append('[[')
+                output.append(ID_To_String(data[var]["prereqs"][it]))
+                output.append(']]<!--')
+                output.append(data[var]["prereqs"][it])
+                output.append('-->')
                 if(not(it+1 == len(data[var]["prereqs"]))):
-                    list.append(", ")
-            list.append('|')
+                    output.append(", ")
+            output.append('|')
             
         if("prereqs2" in data[var]):
-            list.append("PREREQS2=")
+            output.append("PREREQS2=")
             for it in range(0, len(data[var]["prereqs2"])):
-                list.append('[[')
-                list.append(ID_To_String(data[var]["prereqs2"][it]))
-                list.append(']]<!--')
-                list.append(data[var]["prereqs2"][it])
-                list.append('-->')
+                output.append('[[')
+                output.append(ID_To_String(data[var]["prereqs2"][it]))
+                output.append(']]<!--')
+                output.append(data[var]["prereqs2"][it])
+                output.append('-->')
                 if(not(it+1 == len(data[var]["prereqs2"]))):
-                    list.append(", ")
-            list.append('|')
+                    output.append(", ")
+            output.append('|')
         
         if("cancels" in data[var]):
-            list.append("CANCELS=")
+            output.append("CANCELS=")
             for it in range(0, len(data[var]["cancels"])):
-                list.append('[[')
-                list.append(ID_To_String(data[var]["cancels"][it]))
-                list.append(']]<!--')
-                list.append(data[var]["cancels"][it])
-                list.append('-->')
+                output.append('[[')
+                output.append(ID_To_String(data[var]["cancels"][it]))
+                output.append(']]<!--')
+                output.append(data[var]["cancels"][it])
+                output.append('-->')
                 if(it+1 < len(data[var]["cancels"])):
-                    list.append(", ")
-            list.append('|')
+                    output.append(", ")
+            output.append('|')
             
         if("changes_to" in data[var]):
-            list.append("CHANGES_TO=")
+            output.append("CHANGES_TO=")
             for it in range(0, len(data[var]["changes_to"])):
-                list.append('[[')
-                list.append(ID_To_String(data[var]["changes_to"][it]))
-                list.append(']]<!--')
-                list.append(data[var]["changes_to"][it])
-                list.append('-->')
+                output.append('[[')
+                output.append(ID_To_String(data[var]["changes_to"][it]))
+                output.append(']]<!--')
+                output.append(data[var]["changes_to"][it])
+                output.append('-->')
                 if(not(it+1 == len(data[var]["changes_to"]))):
-                    list.append(", ")
-            list.append('|')
+                    output.append(", ")
+            output.append('|')
             
         if("leads_to" in data[var]):
-            list.append("LEADS_TO=")
+            output.append("LEADS_TO=")
             for it in range(0, len(data[var]["leads_to"])):
-                list.append('[[')
-                list.append(ID_To_String(data[var]["leads_to"][it]))
-                list.append(']]<!--')
-                list.append(data[var]["leads_to"][it])
-                list.append('-->')
+                output.append('[[')
+                output.append(ID_To_String(data[var]["leads_to"][it]))
+                output.append(']]<!--')
+                output.append(data[var]["leads_to"][it])
+                output.append('-->')
                 if(not(it+1 == len(data[var]["leads_to"]))):
-                    list.append(", ")
-            list.append('|')
+                    output.append(", ")
+            output.append('|')
             
         
         if("points" in data[var]):
-            list.append(str(data[var]["points"]))
-            list.append('|')
+            output.append(str(data[var]["points"]))
+            output.append('|')
         else:
-            list.append('0|')
+            output.append('0|')
 
         if("visibility" in data[var]):
-            list.append(str(data[var]["visibility"]))
-            list.append('|')
+            output.append(str(data[var]["visibility"]))
+            output.append('|')
         else:
-            list.append('0|')
+            output.append('0|')
         
         if("ugliness" in data[var]):
-            list.append(str(data[var]["ugliness"]))
-            list.append('|')
+            output.append(str(data[var]["ugliness"]))
+            output.append('|')
         else:
-            list.append('0|')
-        list.append(data[var]["description"])
+            output.append('0|')
+        output.append(data[var]["description"])
         
         if( "starting_trait" in data[var]):
-            list.append('|trait=1')
+            output.append('|trait=1')
         
         if( "profession" in data[var]):
-            list.append('|profession=1')
+            output.append('|profession=1')
         
         if( "valid" in data[var]):
-            list.append('|invalid=1')
+            output.append('|invalid=1')
         
         if( "threshreq" in data[var]):
-            list.append('|threshold=1')
+            output.append('|threshold=1')
             
         if( "purifiable" in data[var]): #naively assuming that when set it is to not be the default value.
-            list.append('|purifiable=1')
+            output.append('|purifiable=1')
         
         if("category" in data[var]):
             if( "MUTCAT_LIZARD" in data[var]["category"] ):
-                list.append('|lizard=1')
+                output.append('|lizard=1')
             if( "MUTCAT_BIRD" in data[var]["category"] ):
-                list.append('|bird=1')
+                output.append('|bird=1')
             if( "MUTCAT_FISH" in data[var]["category"] ):
-                list.append('|fish=1')
+                output.append('|fish=1')
             if( "MUTCAT_BEAST" in data[var]["category"] ):
-                list.append('|beast=1')
+                output.append('|beast=1')
             if( "MUTCAT_FELINE" in data[var]["category"] ):
-                list.append('|feline=1')
+                output.append('|feline=1')
             if( "MUTCAT_LUPINE" in data[var]["category"] ):
-                list.append('|lupine=1')
+                output.append('|lupine=1')
             if( "MUTCAT_URSINE" in data[var]["category"] ):
-                list.append('|ursine=1')
+                output.append('|ursine=1')
             if( "MUTCAT_CATTLE" in data[var]["category"] ):
-                list.append('|cattle=1')
+                output.append('|cattle=1')
             if( "MUTCAT_INSECT" in data[var]["category"] ):
-                list.append('|insect=1')
+                output.append('|insect=1')
             if( "MUTCAT_PLANT" in data[var]["category"] ):
-                list.append('|plant=1')
+                output.append('|plant=1')
             if( "MUTCAT_SLIME" in data[var]["category"] ):
-                list.append('|slime=1')
+                output.append('|slime=1')
             if( "MUTCAT_TROGLOBITE" in data[var]["category"] ):
-                list.append('|troglobite=1')
+                output.append('|troglobite=1')
             if( "MUTCAT_CEPHALOPOD" in data[var]["category"] ):
-                list.append('|cephalopod=1')
+                output.append('|cephalopod=1')
             if( "MUTCAT_SPIDER" in data[var]["category"] ):
-                list.append('|spider=1')
+                output.append('|spider=1')
             if( "MUTCAT_MEDICAL" in data[var]["category"] ):
-                list.append('|medical=1')
+                output.append('|medical=1')
             if( "MUTCAT_ALPHA" in data[var]["category"] ):
-                list.append('|alpha=1')
+                output.append('|alpha=1')
             if( "MUTCAT_ELFA" in data[var]["category"] ):
-                list.append('|elfa=1')
+                output.append('|elfa=1')
             if( "MUTCAT_CHIMERA" in data[var]["category"] ):
-                list.append('|chimera=1')
+                output.append('|chimera=1')
             if( "MUTCAT_RAPTOR" in data[var]["category"] ):
-                list.append('|raptor=1')
+                output.append('|raptor=1')
             if( "MUTCAT_RAT" in data[var]["category"] ):
-                list.append('|rat=1')
+                output.append('|rat=1')
             if( "MUTCAT_MYCUS" in data[var]["category"] ):
-                list.append('|mycus=1')
+                output.append('|mycus=1')
             if( "MUTCAT_MARLOSS" in data[var]["category"] ):
-                list.append('|marloss=1')                
+                output.append('|marloss=1')                
             
-        list.append("}}\n<noinclude>\n<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n==Notes==\n\n")
+        output.append("}}\n<noinclude>\n<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n==Notes==\n")
+        if( "attacks" in data[var] ):
+            if (isinstance(data[var]["attacks"], list)):
+                for it in range(0, len(data[var]["attacks"])):
+                    output.extend(Attack_To_String(data[var]["attacks"][it]))
+            else:
+                print(type(data[var]["attacks"]))
+                output.extend(Attack_To_String(data[var]["attacks"]))
+        
+        output.append("\n")
         if( "starting_trait" in data[var] ) or ( "profession" in data[var] ) :
-            list.append("{{Navbar/traits}}\n")
+            output.append("{{Navbar/traits}}\n")
 
-        list.append("[[category: Mutations]]\n")
+        output.append("[[category: Mutations]]\n")
         if( "threshreq" in data[var]):
-            list.append("[[category: Post-threshold mutations]]\n")
+            output.append("[[category: Post-threshold mutations]]\n")
             
-        list.append("{{ver|0.D}}\n</noinclude>")
+        output.append("{{ver|0.D}}\n</noinclude>")
 
-        text = "".join(list)
+        text = "".join(output)
         text.replace("\n", "\\n")
         print text
         root.clipboard_clear()
