@@ -240,6 +240,13 @@ while True:
                 output.append('|marloss=1')                
             
         output.append("}}\n<noinclude>\n<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n==Notes==\n")
+        #Active
+        if( "active" in data[var] ):
+            output.append("* Can be activated, use the {{k|[}} mutation menu.")
+            if( "starts_active" in data[var] ):
+                output.append(" Starts active.")
+       
+        #Convert attacks.
         if( "attacks" in data[var] ):
             if (isinstance(data[var]["attacks"], list)):
                 for it in range(0, len(data[var]["attacks"])):
