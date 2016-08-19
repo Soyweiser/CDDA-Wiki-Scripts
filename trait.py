@@ -278,6 +278,18 @@ while True:
                 output.append(str(data[var]['time']))
                 output.append(" turns of use.")
             output.append("\n")
+        #Bodytemp
+        if( "bodytemp_modifiers" in data[var] ):
+            output.append("* Adds [[Body temperature|body temperature]], adds ")
+            output.append(str(data[var]['bodytemp_modifiers'][0]))
+            output.append(" when overheating, and ")
+            output.append(str(data[var]['bodytemp_modifiers'][1]))
+            output.append(" normally.\n")
+        if( "bodytemp_sleep" in data[var] ):
+            output.append("* ")
+            output.append(str(data[var]['bodytemp_sleep']))
+            output.append(" additional body temperature will be added while sleeping.\n")
+
         #Wet_protection
         if( "wet_protection" in data[var] ):
             output.append("* Gives [[wet]] protection:\n")
@@ -315,8 +327,16 @@ while True:
             for it in range(0, len(data[var]["armor"])):
                 if (data[var]["armor"][it]["parts"] != "ALL"):
                     output.append("** ")
-                    output.append(data[var]["armor"][it]["parts"])
-                    output.append(" location:")
+                    if (isinstance(data[var]["armor"][it]["parts"], list)):
+                        for it2 in range(0, len(data[var]["armor"][it]["parts"])):
+                            output.append(data[var]["armor"][it]["parts"][it2])
+                            output.append(" ")
+                    else:
+                        output.append(data[var]["armor"][it]["parts"])
+                    output.append("location")
+                    if (it2 > 0):
+                        output.append("s")
+                    output.append(":")
                     for it2 in range(0, len(data[var]["armor"][it])):
                         if (it2 > 1):
                             output.append(",")
@@ -327,9 +347,6 @@ while True:
                             output.append(data[var]["armor"][it].keys()[it2])
                             output.append(" protection")
                     output.append("\n")
-                        
-                    
-                
        
         #Convert attacks.
         if( "attacks" in data[var] ):

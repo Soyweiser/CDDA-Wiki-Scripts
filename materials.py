@@ -4,7 +4,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#data is copied to clipboard
+#data is copied to clipboard, used for the http://www.wiki.cataclysmdda.com/index.php?title=Materials page
 
 with open('data/json/materials.json') as data_file:    
     data = json.load(data_file)
@@ -29,6 +29,12 @@ for it in range(0, len(data)):
     output.append(data[it]['dmg_adj'][3])
     output.append("|density=")
     output.append(str(data[it]['density']))
+    if('edible' in  data[it]):
+        if(data[it]['edible'] == True):
+            output.append("|edible=Y")
+    if('soft' in  data[it]):
+        if(data[it]['soft'] == True):
+            output.append("|soft=Y")        
         
     output.append("}}\n\n")
 
