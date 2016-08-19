@@ -263,6 +263,20 @@ while True:
             output.append("* Can be activated, use the {{k|[}} mutation menu.")
             if( "starts_active" in data[var] ):
                 output.append(" Starts active.")
+            if( "cost" in data[var] ):
+                output.append(" Costs: ")
+                output.append(str(data[var]['cost']))
+                if( "fatigue" in data[var] ):
+                    output.append(" fatigue")
+                if( "hunger" in data[var] ):
+                    output.append(" hunger")
+                if( "thirst" in data[var] ):
+                    output.append(" thirst")
+                output.append(" points.")
+            if( "time" in data[var] ):
+                output.append(" Per ")
+                output.append(str(data[var]['time']))
+                output.append(" turns of use.")
             output.append("\n")
         #Wet_protection
         if( "wet_protection" in data[var] ):
