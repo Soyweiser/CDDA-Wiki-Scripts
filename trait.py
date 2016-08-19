@@ -347,6 +347,24 @@ while True:
                             output.append(data[var]["armor"][it].keys()[it2])
                             output.append(" protection")
                     output.append("\n")
+                    
+        #Restricts Gear
+        if( "restricts_gear" in data[var] ):
+            output.append("* This mutation removes the ability to wear gear in the ")
+            for it in range(0, len(data[var]["restricts_gear"])):
+                output.append(data[var]["restricts_gear"][it])
+                if(not(it+1 == len(data[var]["restricts_gear"]))):
+                    output.append(", ")
+            output.append(" location")
+            if(it > 1):
+                output.append("s")
+            output.append(".\n")
+            
+        if( "allow_soft_gear" in data[var] ):
+            output.append("** Unless the gear is made of a soft [[material]].\n")
+        if( "destroys_gear" in data[var] ):
+            output.append("** Any invalid gear that is equipped in the slots above will be destroyed on mutation.\n")
+            
        
         #Convert attacks.
         if( "attacks" in data[var] ):
