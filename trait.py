@@ -65,26 +65,44 @@ def Attack_To_String(attack):
     
     retval.append("this mutation gives an additional attack, with ")
     retval.append(str(attack["chance"]))
-    retval.append("% chance of activating, using the ")
-    retval.append(attack["body_part"])
-    retval.append(" body part, doing ")
-    if (isinstance(attack["base_damage"], list)):
-        for it2 in range(0, len(attack["base_damage"])):
-            retval.append(str(attack["base_damage"][it2]["amount"]))
+    retval.append("% chance of activating, ")
+    if("body_part" in attack):
+        retval.append("using the ")
+        retval.append(attack["body_part"])
+        retval.append(" body part, ")
+    retval.append("doing ")
+    if ("base_damage" in attack):
+        if (isinstance(attack["base_damage"], list)):
+            for it2 in range(0, len(attack["base_damage"])):
+                retval.append(str(attack["base_damage"][it2]["amount"]))
+                retval.append(" points of ")
+                retval.append(attack["base_damage"][it2]["damage_type"])
+                retval.append(" damage")
+                if(not(it2+1 == len(attack["base_damage"]))):
+                    retval.append(", and ")
+            retval.append(".")
+            retval.append("\n")
+        else:
+            retval.append(str(attack["base_damage"]["amount"]))
             retval.append(" points of ")
-            retval.append(attack["base_damage"][it2]["damage_type"])
-            retval.append(" damage")
-            if(not(it2+1 == len(attack["base_damage"]))):
-                retval.append(", and ")
-        retval.append(".")
-        retval.append("\n")
-    else:
-        retval.append(str(attack["base_damage"]["amount"]))
-        retval.append(" points of ")
-        retval.append(attack["base_damage"]["damage_type"])
-        retval.append(" damage")
-        retval.append(".")
-        retval.append("\n")
+            retval.append(attack["base_damage"]["damage_type"])
+            retval.append(" damage.\n")
+    elif ("strength_damage" in attack):
+        if (isinstance(attack["strength_damage"], list)):
+            for it2 in range(0, len(attack["strength_damage"])):
+                retval.append(str(attack["strength_damage"][it2]["amount"]))
+                retval.append(" points of ")
+                retval.append(attack["strength_damage"][it2]["damage_type"])
+                retval.append(" damage")
+                if(not(it2+1 == len(attack["strength_damage"]))):
+                    retval.append(", and ")
+            retval.append(".")
+            retval.append("\n")
+        else:
+            retval.append(str(attack["strength_damage"]["amount"]))
+            retval.append(" points of ")
+            retval.append(attack["strength_damage"]["damage_type"])
+            retval.append(" damage, which is multiplied by strength.\n")
     return retval
 
 
@@ -245,6 +263,59 @@ while True:
             output.append("* Can be activated, use the {{k|[}} mutation menu.")
             if( "starts_active" in data[var] ):
                 output.append(" Starts active.")
+            output.append("\n")
+        #Wet_protection
+        if( "wet_protection" in data[var] ):
+            output.append("* Gives [[wet]] protection:\n")
+            for it in range(0, len(data[var]["wet_protection"])):
+                output.append("** ")
+                output.append(data[var]["wet_protection"][it]["part"])
+                for it2 in range(0, len(data[var]["wet_protection"][it])):
+                    if (it2 > 1):
+                        output.append(",")
+                    if (data[var]["wet_protection"][it].keys()[it2] != "part"):
+                        output.append(" ")
+                        output.append(str(data[var]["wet_protection"][it][data[var]["wet_protection"][it].keys()[it2]]))
+                        output.append(" ")
+                        output.append(data[var]["wet_protection"][it].keys()[it2])
+                        output.append(" protection")
+                output.append(".\n")
+        #Armor
+        if( "armor" in data[var] ):
+            output.append("* Provides the following armor values.\n")
+            for it in range(0, len(data[var]["armor"])):
+                if not (isinstance(data[var]["armor"][it]["parts"], list)):
+                    if (data[var]["armor"][it]["parts"] == "ALL"):
+                        output.append("** All locations:")
+                        for it2 in range(0, len(data[var]["armor"][it])):
+                            if (it2 > 1):
+                                output.append(",")
+                            if (data[var]["armor"][it].keys()[it2] != "parts"):
+                                output.append(" ")
+                                output.append(str(data[var]["armor"][it][data[var]["armor"][it].keys()[it2]]))
+                                output.append(" ")
+                                output.append(data[var]["armor"][it].keys()[it2])
+                                output.append(" protection")
+                        output.append(".\n")
+                            
+            for it in range(0, len(data[var]["armor"])):
+                if (data[var]["armor"][it]["parts"] != "ALL"):
+                    output.append("** ")
+                    output.append(data[var]["armor"][it]["parts"])
+                    output.append(" location:")
+                    for it2 in range(0, len(data[var]["armor"][it])):
+                        if (it2 > 1):
+                            output.append(",")
+                        if (data[var]["armor"][it].keys()[it2] != "parts"):
+                            output.append(" ")
+                            output.append(str(data[var]["armor"][it][data[var]["armor"][it].keys()[it2]]))
+                            output.append(" ")
+                            output.append(data[var]["armor"][it].keys()[it2])
+                            output.append(" protection")
+                    output.append("\n")
+                        
+                    
+                
        
         #Convert attacks.
         if( "attacks" in data[var] ):
