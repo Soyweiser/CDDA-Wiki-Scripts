@@ -211,7 +211,7 @@ while True:
         if( "purifiable" in data[var]): #naively assuming that when set it is to not be the default value.
             output.append('|purifiable=1')
         
-        if("category" in data[var]):
+        if( "category" in data[var]):
             if( "MUTCAT_LIZARD" in data[var]["category"] ):
                 output.append('|lizard=1')
             if( "MUTCAT_BIRD" in data[var]["category"] ):
@@ -364,8 +364,35 @@ while True:
             output.append("** Unless the gear is made of a soft [[material]].\n")
         if( "destroys_gear" in data[var] ):
             output.append("** Any invalid gear that is equipped in the slots above will be destroyed on mutation.\n")
+        
+        if( "encumbrance_always" in data[var] ):
+            output.append("* Adds permanent encumbrance in the following locations: ")
+            if (isinstance(data[var]["encumbrance_always"], list)):
+                for it in range(0, len(data[var]["encumbrance_always"])):
+                    output.extend(data[var]["encumbrance_always"][it][0])
+                    output.extend(" : ")
+                    output.extend(str(data[var]["encumbrance_always"][it][1]))
+                    if(not(it+1 == len(data[var]["encumbrance_always"]))):
+                        output.append(", ")
+            else:
+                print(type(data[var]["encumbrance_always"]))
+                output.extend((data[var]["encumbrance_always"]))
+            output.append(".\n")
             
-       
+        if( "encumbrance_covered" in data[var] ):
+            output.append("* Adds encumbrance in the following locations: ")
+            if (isinstance(data[var]["encumbrance_covered"], list)):
+                for it in range(0, len(data[var]["encumbrance_covered"])):
+                    output.extend(data[var]["encumbrance_covered"][it][0])
+                    output.extend(" : ")
+                    output.extend(str(data[var]["encumbrance_covered"][it][1]))
+                    if(not(it+1 == len(data[var]["encumbrance_covered"]))):
+                        output.append(", ")
+            else:
+                print(type(data[var]["encumbrance_covered"]))
+                output.extend((data[var]["encumbrance_covered"]))
+            output.append(", if the location is covered by clothing lacking the OVERSIZE flag.\n")
+        
         #Convert attacks.
         if( "attacks" in data[var] ):
             if (isinstance(data[var]["attacks"], list)):
