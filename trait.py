@@ -65,13 +65,13 @@ def Attack_To_String(attack):
     
     retval.append("this mutation gives an additional attack, with ")
     retval.append(str(attack["chance"]))
-    retval.append("% chance of activating, ")
+    retval.append("% chance of activating")
     if("body_part" in attack):
-        retval.append("using the ")
+        retval.append(", using the ")
         retval.append(attack["body_part"])
-        retval.append(" body part, ")
-    retval.append("doing ")
+        retval.append(" body part")
     if ("base_damage" in attack):
+        retval.append(", doing ")
         if (isinstance(attack["base_damage"], list)):
             for it2 in range(0, len(attack["base_damage"])):
                 retval.append(str(attack["base_damage"][it2]["amount"]))
@@ -80,14 +80,13 @@ def Attack_To_String(attack):
                 retval.append(" damage")
                 if(not(it2+1 == len(attack["base_damage"]))):
                     retval.append(", and ")
-            retval.append(".")
-            retval.append("\n")
         else:
             retval.append(str(attack["base_damage"]["amount"]))
             retval.append(" points of ")
             retval.append(attack["base_damage"]["damage_type"])
-            retval.append(" damage.\n")
+            retval.append(" damage")
     elif ("strength_damage" in attack):
+        retval.append(", doing ")
         if (isinstance(attack["strength_damage"], list)):
             for it2 in range(0, len(attack["strength_damage"])):
                 retval.append(str(attack["strength_damage"][it2]["amount"]))
@@ -96,13 +95,17 @@ def Attack_To_String(attack):
                 retval.append(" damage")
                 if(not(it2+1 == len(attack["strength_damage"]))):
                     retval.append(", and ")
-            retval.append(".")
-            retval.append("\n")
         else:
             retval.append(str(attack["strength_damage"]["amount"]))
             retval.append(" points of ")
             retval.append(attack["strength_damage"]["damage_type"])
-            retval.append(" damage, which is multiplied by strength.\n")
+            retval.append(" damage, which is multiplied by strength")
+    if ("hardcoded_effect" in attack):
+        retval.append(", ")
+        if ("base_damage" in attack) or ("strength_damage" in attack):
+            retval.append("additionally ")
+        retval.append("it has a special hardcoded attack effect")
+    retval.append(".\n")
     return retval
 
 
