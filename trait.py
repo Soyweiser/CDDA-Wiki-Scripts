@@ -336,7 +336,7 @@ while True:
                             output.append(" ")
                     else:
                         output.append(data[var]["armor"][it]["parts"])
-                    output.append("location")
+                    output.append(" location")
                     if (it2 > 0):
                         output.append("s")
                     output.append(":")
