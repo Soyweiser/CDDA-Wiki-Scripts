@@ -34,7 +34,7 @@ def Attack_To_String(attack):
     retval = list()
     retval.append("* ")
     if("required_mutations" in attack):
-        retval.append("if you also have the ")
+        retval.append("If you also have the ")
         for it in range(0, len(attack["required_mutations"])):
             retval.append('[[')
             retval.append(ID_To_String(attack["required_mutations"][it]))
@@ -49,7 +49,10 @@ def Attack_To_String(attack):
         retval.append(", ")
     
     if("blocker_mutations" in attack):
-        retval.append("unless you have the ")
+        if("required_mutations" in attack):
+            retval.append("unless you have the ")
+        else:
+            retval.append("Unless you have the ")
         for it in range(0, len(attack["blocker_mutations"])):
             retval.append('[[')
             retval.append(ID_To_String(attack["blocker_mutations"][it]))
@@ -63,9 +66,16 @@ def Attack_To_String(attack):
             retval.append("s")
         retval.append(", ")
     
-    retval.append("this mutation gives an additional attack, with ")
-    retval.append(str(attack["chance"]))
-    retval.append("% chance of activating")
+    if("blocker_mutations" in attack) or ("required_mutations" in attack):
+        retval.append("this mutation gives an additional attack, with a ")
+    else:
+        retval.append("This mutation gives an additional attack, with a ")
+    if(attack["chance"] == 1):
+        retval.append("100% chance of activating")
+    else:
+        retval.append("at minimum one in ")
+        retval.append(str(attack["chance"]))
+        retval.append(" chance of activating")
     if("body_part" in attack):
         retval.append(", using the ")
         retval.append(attack["body_part"])
