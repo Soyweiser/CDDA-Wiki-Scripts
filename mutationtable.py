@@ -5,7 +5,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#data is copied to clipboard, used for the Template:Mutationtable‎‎ 
+#Data is copied to clipboard, used for the Template:Mutationtable
 
 with open('data/json/mutations.json') as data_file:    
     data = json.load(data_file)
@@ -85,6 +85,8 @@ for iterator in range(0, len(data)):
                 mut_trait[dict_categories[it]]['mutations'].append(data[iterator]['name'])
     else:
         if("valid" not in data[iterator]):
+            mut_neutral.append(data[iterator]['name'])
+        elif("starting_trait" in data[iterator]):
             mut_neutral.append(data[iterator]['name'])
 
 for iterator in range(0, len(list_categories)):
