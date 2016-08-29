@@ -54,14 +54,6 @@ def ID_To_WikiString(id):
         return "Self-aware"
     return id
 
-
-ID_mut = dict()
-for iterator in range(0, len(data)):
-    keyD = dict()
-    keyD['id_nr'] = iterator
-    keyD["name"] = data[iterator]["name"]
-    ID_mut[data[iterator]["id"]] = keyD
-
 mut_trait = dict()
 for iterator in range(0, len(list_categories)):
     traits = dict()
