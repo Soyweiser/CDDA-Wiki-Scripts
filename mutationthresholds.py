@@ -18,8 +18,6 @@ dict_categories = { 'MUTCAT_LIZARD' : 'Lizard', 'MUTCAT_BIRD' : 'Bird', 'MUTCAT_
 def ID_To_WikiString(id):
     if id == "Infrared Vision":
         return "Infrared Vision (Mutation)|Infrared Vision"
-    if id == "Self-Aware":
-        return "Self-aware"
     return id
 
 mut_trait = dict()

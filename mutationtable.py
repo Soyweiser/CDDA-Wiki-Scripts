@@ -50,8 +50,6 @@ output = [ """{{Navbox
 def ID_To_WikiString(id):
     if id == "Infrared Vision":
         return "Infrared Vision (Mutation)|Infrared Vision"
-    if id == "Self-Aware":
-        return "Self-aware"
     return id
 
 mut_trait = dict()
