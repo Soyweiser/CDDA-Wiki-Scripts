@@ -9,6 +9,7 @@ root.withdraw()
 #Type in a positive int to convert a mutation at that location in the data list into the mediawiki code. Positioning over different versions of the json files is not guaranteed.
 #   The conversion is echoed, and automatically loaded in the clipboard. Just copy paste and edit into the wiki.
 #Enter a mutation ID to get the mutations location in the array. These are supposed to be permanent ID's.
+#Do note that a few of the mutation pages need some work afterwards, stuff like 'infrared vision' being on the 'Infrared_Vision_(Mutation)' page and bionic variants are not automatically generated.
 
 
 with open('data/json/mutations.json') as data_file:    
