@@ -78,9 +78,9 @@ def Attack_To_String(attack):
         retval.append(str(attack["chance"]))
         retval.append(" chance of activating")
     if("body_part" in attack):
-        retval.append(", using the ")
+        retval.append(", using the {{btt|")
         retval.append(attack["body_part"])
-        retval.append(" body part")
+        retval.append("}} body part")
     if ("base_damage" in attack):
         retval.append(", doing ")
         if (isinstance(attack["base_damage"], list)):
@@ -308,8 +308,9 @@ while True:
         if( "wet_protection" in data[var] ):
             output.append("* Gives [[wet]] protection:\n")
             for it in range(0, len(data[var]["wet_protection"])):
-                output.append("** ")
+                output.append("** {{btt|")
                 output.append(data[var]["wet_protection"][it]["part"])
+                output.append("}}")
                 for it2 in range(0, len(data[var]["wet_protection"][it])):
                     if (it2 > 1):
                         output.append(",")
@@ -343,16 +344,21 @@ while True:
                     output.append("** ")
                     if (isinstance(data[var]["armor"][it]["parts"], list)):
                         for it2 in range(0, len(data[var]["armor"][it]["parts"])):
+                            if(it2 > 0):
+                                output.append(", ")
+                            output.append("{{btt|")
                             output.append(data[var]["armor"][it]["parts"][it2])
-                            output.append(" ")
+                            output.append("}}")
                     else:
+                        output.append("{{btt|")
                         output.append(data[var]["armor"][it]["parts"])
+                        output.append("}}")
                     output.append(" location")
                     if (it2 > 0):
                         output.append("s")
                     output.append(":")
                     for it2 in range(0, len(data[var]["armor"][it])):
-                        if (it2 > 1):
+                        if (it2 > 0):
                             output.append(",")
                         if (data[var]["armor"][it].keys()[it2] != "parts"):
                             output.append(" ")
@@ -366,7 +372,9 @@ while True:
         if( "restricts_gear" in data[var] ):
             output.append("* This mutation removes the ability to wear gear in the ")
             for it in range(0, len(data[var]["restricts_gear"])):
+                output.append("{{btt|")
                 output.append(data[var]["restricts_gear"][it])
+                output.append("}}")
                 if(not(it+1 == len(data[var]["restricts_gear"]))):
                     output.append(", ")
             output.append(" location")
@@ -383,8 +391,9 @@ while True:
             output.append("* Adds permanent encumbrance in the following locations: ")
             if (isinstance(data[var]["encumbrance_always"], list)):
                 for it in range(0, len(data[var]["encumbrance_always"])):
+                    output.append("{{btt|")
                     output.extend(data[var]["encumbrance_always"][it][0])
-                    output.extend(" : ")
+                    output.extend("}} : ")
                     output.extend(str(data[var]["encumbrance_always"][it][1]))
                     if(not(it+1 == len(data[var]["encumbrance_always"]))):
                         output.append(", ")
@@ -397,8 +406,9 @@ while True:
             output.append("* Adds encumbrance in the following locations: ")
             if (isinstance(data[var]["encumbrance_covered"], list)):
                 for it in range(0, len(data[var]["encumbrance_covered"])):
+                    output.append("{{btt|")
                     output.extend(data[var]["encumbrance_covered"][it][0])
-                    output.extend(" : ")
+                    output.extend("}} : ")
                     output.extend(str(data[var]["encumbrance_covered"][it][1]))
                     if(not(it+1 == len(data[var]["encumbrance_covered"]))):
                         output.append(", ")
