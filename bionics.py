@@ -34,7 +34,6 @@ for iterator in range(0, len(data1)):
     keyD["name"] = data1[iterator]["name"]
     ID_bio_item[data1[iterator]["id"]] = keyD
 
-    
 def ID_To_String(id):
     return ID_bionic[id]["name"]
 
@@ -45,7 +44,7 @@ def ID_To_Bio_Int(id):
         return -1
 
 def ID_To_Item_String(id):
-    return ID_bionic[id]["name"]
+    return ID_bio_item[id]["name"]
         
 def ID_To_Item_Int(id): #this should return the location of the bionic inside the items file. However, not all bionics have items.
     if(id in ID_bio_item):
@@ -74,10 +73,82 @@ while True:
             output.append(data1[item_id]['id'])
             output.append("\n|glyph=")
             output.append(data1[item_id]['symbol'])
-            output.append("\n|symbol=")
+            output.append("\n|color=")
             output.append(data1[item_id]['color'])
-            output.append("\n")
+            for it in range(0, len(data1[item_id]['material'])):
+                output.append("\n|mat")
+                output.append(str(it+1))
+                output.append("=")
+                output.append(data1[item_id]['material'][it])
+            output.append("\n|volume=")
+            output.append(str(data1[item_id]['volume']))
+            output.append("\n|weight=")
+            output.append(str(data1[item_id]['weight']))
+            output.append("\n|b_name=")
+            output.append( ID_To_String(data1[item_id]['id']) )
+            output.append("\n|difficulty=")
+            output.append(str(data1[item_id]['difficulty']))
+            if('capacity' in data[var]):
+                output.append("\n|capacity=")
+                output.append(str(data[var]['capacity']))
+            if('toggled' in data[var]):
+                output.append("\n|toggled=")
+                output.append(str(data[var]['toggled']))
+            if('power_source' in data[var]):
+                output.append("\n|power_source=")
+                output.append(str(data[var]['power_source']))
+            if('act_cost' in data[var]):
+                output.append("\n|act_cost=")
+                output.append(str(data[var]['act_cost']))
+            if('act_cost' in data[var]):
+                output.append("\n|act_cost=")
+                output.append(str(data[var]['act_cost']))
+            if('react_cost' in data[var]):
+                output.append("\n|react_cost=")
+                output.append(str(data[var]['react_cost']))
+            if('time' in data[var]):
+                output.append("\n|time=")
+                output.append(str(data[var]['time']))
+            if('deact_cost' in data[var]):
+                output.append("\n|deact_cost=")
+                output.append(str(data[var]['deact_cost']))
+            if('faulty' in data[var]):
+                output.append("\n|faulty=")
+                output.append(str(data[var]['faulty']))
+            if('price' in data1[item_id]):
+                output.append("\n|price=")
+                output.append(str(data1[item_id]['price']))
+            else:
+                output.append("\n|price=0")
+            if('bashing' in data1[item_id]):
+                output.append("\n|bash=")
+                output.append(str(data1[item_id]['bashing']))
+            else:
+                output.append("\n|bash=0")
+            if('cut' in data1[item_id]):
+                output.append("\n|cut=")
+                output.append(str(data1[item_id]['cut']))
+            else:
+                output.append("\n|cut=0")
+            if('tohit' in data1[item_id]):
+                output.append("\n|tohit=")
+                output.append(str(data1[item_id]['tohit']))
+            else:
+                output.append("\n|tohit=0")
+            if('description' in data1[item_id]):
+                output.append("\n|description=")
+                output.append(str(data1[item_id]['description']))
+            
+            #footer
+            output.append("""\n}}<noinclude>
+==Notes==
+<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->
 
+[[Category:CBMs]]
+{{footer/CBM}}
+{{ver|0.D}}
+</noinclude>""")
+            
         text = "".join(output)
         text.replace("\n", "\\n")
         print text
@@ -91,5 +162,5 @@ while True:
             root.destroy()
             exit()
         else:
-            print ID_To_int(var)
+            print ID_To_Bio_Int(var)
             var = raw_input(">")
