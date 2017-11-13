@@ -32,7 +32,11 @@ for iterator in range(0, len(data1)):
     keyD = dict()
     keyD['id_nr'] = iterator
     keyD["name"] = data1[iterator]["name"]
-    ID_bio_item[data1[iterator]["id"]] = keyD
+    if ('id' in data1[iterator]):
+        ID_bio_item[data1[iterator]["id"]] = keyD
+    else:
+        data1[iterator]["id"] = data1[iterator]["abstract"]
+        ID_bio_item[data1[iterator]["id"]] = keyD
 
 def ID_To_String(id):
     return ID_bionic[id]["name"]
@@ -51,6 +55,12 @@ def ID_To_Item_Int(id): #this should return the location of the bionic inside th
         return ID_bio_item[id]["id_nr"]
     else:
         return -1
+
+def getValue(id, value): #this returns the value of the bionic item. It is a recursive function that takes into account the abstract item.
+    if(value in data1[id]):
+        return data1[id][value]
+    else:
+        return getValue(ID_To_Item_Int(data1[id]["copy-from"]), value)
 
 var = raw_input(">")
 while True:
@@ -72,7 +82,7 @@ while True:
             output.append("\n|id=")
             output.append(data1[item_id]['id'])
             output.append("\n|glyph=")
-            output.append(data1[item_id]['symbol'])
+            output.append(getValue(item_id,'symbol'))
             output.append("\n|color=")
             output.append(data1[item_id]['color'])
             for it in range(0, len(data1[item_id]['material'])):

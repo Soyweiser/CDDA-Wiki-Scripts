@@ -6,7 +6,7 @@ root = Tk()
 root.withdraw()
 
 #Data is copied to clipboard, Used to create the various lists for the threshold pages.
-#After executing, select the window running python again. And input a number. This creates a list of mutations copied into the clipboard. Copy and paste into the wiki.
+#After executing, select the window running python again. And input a number. This creates a list of mutations copied into the clipboard. Copy and paste into the wiki. For the mapping between the input number and the page created look at the list_categories list. Start counting at zero.
 
 with open('data/json/mutations.json') as data_file:    
     data = json.load(data_file)

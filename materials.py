@@ -4,7 +4,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#data is copied to clipboard, used for the http://www.wiki.cataclysmdda.com/index.php?title=Materials page
+#data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Materials page
 
 with open('data/json/materials.json') as data_file:    
     data = json.load(data_file)
