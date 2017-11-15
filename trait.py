@@ -114,7 +114,7 @@ def Attack_To_String(attack):
             retval.append(str(attack["strength_damage"]["amount"]))
             retval.append(" points of ")
             retval.append(attack["strength_damage"]["damage_type"])
-            retval.append(" damage, which is multiplied by strength")
+            retval.append(" damage, which is multiplied by [[Strength|strength]]")
     if ("hardcoded_effect" in attack):
         retval.append(", ")
         if ("base_damage" in attack) or ("strength_damage" in attack):
