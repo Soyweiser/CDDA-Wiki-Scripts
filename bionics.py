@@ -5,7 +5,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#Data is copied to clipboard, used for the Bionics
+#Data is copied to clipboard, used for the Bionics, does not work on faulty bionics. Those are different (as they lack an item equivalent).
 
 with open('data/json/bionics.json') as data_file:    
     data = json.load(data_file)
@@ -76,7 +76,7 @@ while True:
         output = []
         
         #Add item if this bionic is made from an item.
-        if( ID_To_Item_Int(data[var]['id']) != -1):
+        if(ID_To_Item_Int(data[var]['id']) != -1):
             item_id = ID_To_Item_Int(data[var]['id'])
             #don't print if it is the abstract bionic.
             if( not "abstract" in data1[item_id]):
@@ -86,6 +86,8 @@ while True:
                 output.append(data1[item_id]['name'])
                 output.append("\n|id=")
                 output.append(data1[item_id]['id'])
+                output.append("\n|b_id=")
+                output.append(str(data[var]['id']))
                 output.append("\n|glyph=")
                 output.append(getValue(item_id,'symbol'))
                 output.append("\n|color=")
@@ -108,7 +110,7 @@ while True:
                     output.append(str(data[var]['capacity']))
                 if('toggled' in data[var]):
                     output.append("\n|toggled=")
-                    output.append(str(data[var]['toggled']))
+                    output.append(str(data[var]['toggled']).lower())
                 if('power_source' in data[var]):
                     output.append("\n|power_source=")
                     output.append(str(data[var]['power_source']))
@@ -126,7 +128,7 @@ while True:
                     output.append(str(data[var]['deact_cost']))
                 if('faulty' in data[var]):
                     output.append("\n|faulty=")
-                    output.append(str(data[var]['faulty']))
+                    output.append(str(data[var]['faulty']).lower())
                 if(checkValue(item_id,'price')):
                     output.append("\n|price=")
                     output.append(str(getValue(item_id,'price')))
@@ -150,6 +152,9 @@ while True:
                 if(checkValue(item_id,'description')):
                     output.append("\n|description=")
                     output.append(str(getValue(item_id,'description')))
+                if('description' in data[var]):
+                    output.append("\n|b_description=")
+                    output.append(str(data[var]['description']))
                 
                 #footer
                 output.append("""\n}}<noinclude>
