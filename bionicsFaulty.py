@@ -5,7 +5,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#Data is copied to clipboard, used for the Faulty Bionics, do not use on normal bionics.
+#Data is copied to clipboard, used for the Faulty Bionics, or bionics without a CBM item, which means they cannot be directly installed, do not use on normal bionics (with a direct CBM).
 
 with open('data/json/bionics.json') as data_file:    
     data = json.load(data_file)
@@ -76,9 +76,10 @@ while True:
 
         #footer
         output.append("""\n}}<noinclude>
-==Notes==""")
+==Notes==
+""")
         if('occupied_bodyparts' in data[var]):
-            output.append("\n* Uses the following [[Bionics#Bionic_Slots|bionic slot(s)]]:\n")
+            output.append("* Uses the following [[Bionics#Bionic_Slots|bionic slot(s)]]:\n")
             for it in range(0, len(data[var]["occupied_bodyparts"])):
                 output.append("** {{btt|")
                 output.append(str(data[var]["occupied_bodyparts"][it][0]))

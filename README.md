@@ -16,15 +16,18 @@ Copy the most recent json files into data/json
 
 ## bionics.py
 
-Data is copied to clipboard, used for the Bionics, does not work on faulty bionics. Those are different (as they lack an item equivalent).
+Data is copied to clipboard, used for the Bionics, does not work on faulty bionics, or bionics without a CBM. Those are different (as they lack an item equivalent).
 
 ## bionicsFaulty.py
 
-Data is copied to clipboard, used for the Faulty Bionics, do not use on normal bionics.
+Data is copied to clipboard, used for the Faulty Bionics, or bionics without a CBM item, which means they cannot be directly installed, do not use on normal bionics (with a direct CBM).
 
 ## bionicsList.py
 
 Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Bionics generates the non faulty bionics list, if used without a command line argument, and if the command True is given, will list the faulty bionics.
+
+### Note
+'Microreactor Upgrade CBM' is an exception here, will need to be manually fixed.
 
 ## materialresistances.py
 
