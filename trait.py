@@ -275,7 +275,7 @@ while True:
             if( "MUTCAT_MARLOSS" in data[var]["category"] ):
                 output.append('|marloss=1')                
             
-        output.append("}}\n<noinclude>\n<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n==Notes==\n")
+        output.append("}}\n<noinclude>\n==Notes==\n")
         #Active
         if( "active" in data[var] ):
             output.append("* Can be activated, use the {{k|[}} mutation menu.")
@@ -530,6 +530,7 @@ while True:
             else:
                 print(type(data[var]["attacks"]))
                 output.extend(Attack_To_String(data[var]["attacks"]))
+        output.append("<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n")
         
         output.append("\n")
         if( "starting_trait" in data[var] ) or ( "profession" in data[var] ) :
