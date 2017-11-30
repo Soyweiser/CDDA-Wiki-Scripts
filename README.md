@@ -12,6 +12,25 @@ Does not directly add content to the wiki. Only converts the json files. Need to
 Get python 2.7
 Copy the most recent json files into data/json
 
+Get 
+Windows:
+Download and install https://www.microsoft.com/en-in/download/details.aspx?id=44266
+pip install --upgrade setuptools
+pip install ez_setup
+
+pip install requests
+If it's still not working, maybe pip didn't install/upgrade setup_tools properly so you might want to try
+easy_install -U setuptools
+pip install --upgrade setuptools
+
+pip install requests (again)
+
+pip.exe install -U requests[security] 
+
+Configure pywikibot:
+Copy the pywikibot_config\cddawiki_family.py to [location of pywikibotinstall]\pywikibot\families
+In the [location of pywikibotinstall] run 'python .\pwb.py generate_user_files' setup your userfiles, and the account used by the bot to connect to the wiki.
+
 # Documentation of scripts
 
 ## bionics.py
@@ -52,8 +71,14 @@ After executing, select the window running python again. And input a number. Thi
 
 ## navbar_trait.py
 
-Data is copied to clipboard, used for the Template:Navbar/traits
+Data is automatically loaded to the Template:Navbar/traits page. Uses pywikibot.
 
 ## trait.py
 
 This script generates the individual pages for the traits/mutations. Works via command line. You need to give the index number of the trait/mutation for the text to generate. Generated text is automaticly placed in the clipboard. Use the mutation/trait id value (for example 'SHELL2') as a command line argument to get the index of that mutation.
+
+#Troubleshooting
+
+## Pywikibot can't connect to the site. Error mentions that 'http' is not a valid protocol return value.
+
+Seems they fixed the bug. (According to the documentation the 'http' protocol value is not allowed).

@@ -54,7 +54,7 @@ while True:
             output.append(str(data[var]['toggled']).lower())
         if('power_source' in data[var]):
             output.append("\n|power_source=")
-            output.append(str(data[var]['power_source']))
+            output.append(str(data[var]['power_source']).lower())
         if('act_cost' in data[var]):
             output.append("\n|act_cost=")
             output.append(str(data[var]['act_cost']))
