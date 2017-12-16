@@ -69,13 +69,14 @@ Data is copied to clipboard, used for the Template:Mutationtable
 Data is copied to clipboard, Used to create the various lists for the threshold pages.
 After executing, select the window running python again. And input a number. This creates a list of mutations copied into the clipboard. Copy and paste into the wiki. For the mapping between the input number and the page created look at the list_categories list. Start counting at zero.
 
-## navbar_trait.py
-
-Data is automatically loaded to the Template:Navbar/traits page. Uses pywikibot.
-
 ## trait.py
 
 This script generates the individual pages for the traits/mutations. Works via command line. You need to give the index number of the trait/mutation for the text to generate. Generated text is automaticly placed in the clipboard. Use the mutation/trait id value (for example 'SHELL2') as a command line argument to get the index of that mutation.
+
+## Automated scripts
+The following scripts simply use pywikibot to upload content to the pages automatically.
+navbar_trait.py -> Template:Navbar/traits
+ComestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Mutagen
 
 #Troubleshooting
 

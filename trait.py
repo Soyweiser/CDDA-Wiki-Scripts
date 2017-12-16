@@ -12,7 +12,7 @@ root.withdraw()
 #Do note that a few of the mutation pages need some work afterwards, stuff like 'infrared vision' being on the 'Infrared_Vision_(Mutation)' page and bionic variants are not automatically generated.
 
 
-with open('data/json/mutations.json') as data_file:    
+with open('data/json/mutations.json') as data_file:
     data = json.load(data_file)
 
 ID_mut = dict()

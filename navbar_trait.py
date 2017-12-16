@@ -80,9 +80,9 @@ for it in range(0, len(Professions)):
 output.append("""	-->
 
 }}<noinclude>
-[[Category:Navigational templates]]
+[[Category:Navigational templates]][[Category:Templates]]
 </noinclude>""")
-    
+
 text = "".join(output)
 text.replace("\n", "\\n")
 site = pywikibot.Site('en', 'cddawiki')

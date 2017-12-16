@@ -1,5 +1,6 @@
 import json
 import sys
+import string
 from pprint import pprint
 from Tkinter import Tk
 root = Tk()
@@ -24,7 +25,7 @@ for iterator in range(0, len(data)):
         else:
             ID_bionic.append(data[iterator]["name"])
 
-ID_bionic.sort()
+ID_bionic = sorted(ID_bionic, key=string.lower) 
 
 output = [ "" ]
 if(len(sys.argv) > 1):

@@ -51,13 +51,13 @@ def ID_To_Item_Int(id): #should return the location of the bionic inside the ite
     else:
         return -1
 
-def getValue(id, value): #returns the value of the bionic item. It is a recursive function that takes into account the abstract item.
+def getValue(id, value): #returns the value field of the bionic item. It is a recursive function that takes into account the abstract item.
     if(value in data1[id]):
         return data1[id][value]
     else:
         return getValue(ID_To_Item_Int(data1[id]["copy-from"]), value)
 
-def checkValue(id, value): #returns if the value is defined in the item description. Or if it is defined in on of the abstracts.
+def checkValue(id, value): #returns if the value field is defined in the item description. Or if it is defined in on of the abstracts.
     if(value in data1[id]):
         return True
     if("copy-from" in data1[id]):
