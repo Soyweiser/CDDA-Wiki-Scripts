@@ -506,19 +506,19 @@ while True:
         #Passive mods
         if( "passive_mods" in data[var] ):
             if( "str_mod" in data[var]["passive_mods"] ):
-                output.extend("* Modifies strength by ")
+                output.extend("* Modifies [[Stats|strength]] by ")
                 output.extend(str(data[var]["passive_mods"]["str_mod"]))
                 output.extend(".\n")
             if( "dex_mod" in data[var]["passive_mods"] ):
-                output.extend("* Modifies dexterity by ")
+                output.extend("* Modifies [[Stats|dexterity]] by ")
                 output.extend(str(data[var]["passive_mods"]["dex_mod"]))
                 output.extend(".\n")
             if( "int_mod" in data[var]["passive_mods"] ):
-                output.extend("* Modifies intelligence by ")
+                output.extend("* Modifies [[Stats|intelligence]] by ")
                 output.extend(str(data[var]["passive_mods"]["int_mod"]))
                 output.extend(".\n")
             if( "per_mod" in data[var]["passive_mods"] ):
-                output.extend("* Modifies perceptions by ")
+                output.extend("* Modifies [[Stats|perception]] by ")
                 output.extend(str(data[var]["passive_mods"]["per_mod"]))
                 output.extend(".\n")
         
