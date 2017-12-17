@@ -76,6 +76,7 @@ This script generates the individual pages for the traits/mutations. Works via c
 ## Automated scripts
 The following scripts simply use pywikibot to upload content to the pages automatically.
 navbar_trait.py -> Template:Navbar/traits
+bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 ComestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Mutagen
 
 #Troubleshooting

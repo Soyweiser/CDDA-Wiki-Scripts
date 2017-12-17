@@ -2,7 +2,7 @@ import json
 import sys
 import pywikibot
 
-#Data is automatically, if you installed pywikibot correctly, to the page.
+#Data is automatically copied to the wiki template page.
 #Usage: python [location of pywikibotinstall]\pwb.py navbar_trait.py
 #   Then input your password, and wait for the page to be updated.
 
