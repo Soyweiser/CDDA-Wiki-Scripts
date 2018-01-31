@@ -1,11 +1,10 @@
 import json
 import sys
-from pprint import pprint
-from Tkinter import Tk
-root = Tk()
-root.withdraw()
+import pywikibot
 
-#Data is copied to clipboard, used for the Template:Mutationtable
+#Data is automatically copied to the wiki template page.
+#Usage: python [location of pywikibotinstall]\pwb.py mutationtable.py
+#   Then input your password, and wait for the page to be updated.
 
 with open('data/json/mutations.json') as data_file:    
     data = json.load(data_file)
@@ -150,9 +149,8 @@ output.append("""\n        -->\n}}<noinclude>
     
 text = "".join(output)
 text.replace("\n", "\\n")
-print text
-root.clipboard_clear()
-root.clipboard_append(text)
-root.update()
-root.destroy()
+site = pywikibot.Site('en', 'cddawiki')
+page = pywikibot.Page(site, 'Template:Mutationtable')
+page.text = text
+page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts mutationtable.py script')
 exit()

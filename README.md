@@ -60,10 +60,6 @@ Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/i
 
 Data is copied to clipboard, used for the Template:Materialtoname
 
-## mutationtable.py
-
-Data is copied to clipboard, used for the Template:Mutationtable
-
 ## mutationthresholds.py
 
 Data is copied to clipboard, Used to create the various lists for the threshold pages.
@@ -78,6 +74,8 @@ The following scripts simply use pywikibot to upload content to the pages automa
 navbar_trait.py -> Template:Navbar/traits
 bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 ComestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Mutagen
+mutationtable.py -> Template:Mutationtable
+foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
 
 #Troubleshooting
 
