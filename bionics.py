@@ -215,7 +215,7 @@ while True:
                         output.append(ID_To_String(data[ID_To_Bio_Int(str(data[var]['included_bionics'][it]))]['id']))
                         output.append("]]")
                     output.append(" bionic")
-                    if (len(data[var]["included_bionics"]) > 0):
+                    if (len(data[var]["included_bionics"]) > 1):
                         output.append("s")
                     output.append(".\n")
                 if('fake_item' in data[var]):
