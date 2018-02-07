@@ -13,11 +13,11 @@ with open('data/json/bionics.json') as data_file:
 ID_bionic = list()
 ID_bionic_faulty = list()
 for iterator in range(0, len(data)):
-    if("faulty" in data[iterator]): #only add bionics that are not faulty to this list.
-        if(not (data[iterator]['faulty'] == True)):
-            ID_bionic.append(data[iterator]["name"])
-        else:
+    if('flags' in data[iterator]):
+        if('BIONIC_FAULTY' in data[iterator]['flags']): #only add bionics that are not faulty to this list.
             ID_bionic_faulty.append(data[iterator]["name"])
+        else:
+            ID_bionic.append(data[iterator]["name"])
     else:
         ID_bionic.append(data[iterator]["name"])
 
@@ -33,6 +33,7 @@ footer = '''
 output.append("{{header/Bionics}}\n")
 output_faulty.append("{{header/FaultyBionics}}\n")
 output.append("<!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts -->\n\n")
+output_faulty.append("<!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts -->\n\n")
 for it in range(0, len(ID_bionic)):
     output.append("{{:")
     output.append(ID_bionic[it])
