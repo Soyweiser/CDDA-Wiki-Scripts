@@ -35,18 +35,8 @@ In the [location of pywikibotinstall] run 'python .\pwb.py generate_user_files' 
 
 ## bionics.py
 
-Data is copied to clipboard, used for the Bionics, does not work on faulty bionics, or bionics without a CBM. Those are different (as they lack an item equivalent).
-
-## bionicsFaulty.py
-
-Data is copied to clipboard, used for the Faulty Bionics, or bionics without a CBM item, which means they cannot be directly installed, do not use on normal bionics (with a direct CBM).
-
-## bionicsList.py
-
-Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Bionics generates the non faulty bionics list, if used without a command line argument, and if the command True is given, will list the faulty bionics.
-
-### Note
-'Microreactor Upgrade CBM' is an exception here, will need to be manually fixed.
+Data is copied to clipboard, used for the Bionics, doesn't work on bionics that are not defined in 'data\json\bionics.json'
+Microreactor upgrade CBM will need to be fixed manually.
 
 ## materialresistances.py
 

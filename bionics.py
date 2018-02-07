@@ -5,7 +5,7 @@ from Tkinter import Tk
 root = Tk()
 root.withdraw()
 
-#Data is copied to clipboard, used for the Bionics, does not work on faulty bionics, or bionics without a CBM. Those are different (as they lack an item equivalent).
+#Data is copied to clipboard, used for the Bionics, doesn't work on bionics that are not defined in 'data\json\bionics.json'
 
 with open('data/json/bionics.json') as data_file:
     data = json.load(data_file)
@@ -88,9 +88,9 @@ while True:
             exit()
         output = []
         
-        if(ID_To_Item_Int(data[var]['id']) == -1):
-            sys.stdout.write("bionic does not have an CBM item, use bionicsFaulty.py to generate instead.")
-        
+#        if(ID_To_Item_Int(data[var]['id']) == -1):
+#            sys.stdout.write("bionic does not have an CBM item, use bionicsFaulty.py to generate instead.")
+
         #Add item if this bionic is made from an item.
         if(ID_To_Item_Int(data[var]['id']) != -1):
             item_id = ID_To_Item_Int(data[var]['id'])
@@ -171,91 +171,127 @@ while True:
                 if('description' in data[var]):
                     output.append("\n|b_description=")
                     output.append(str(data[var]['description']))
-                
-                #footer
-                output.append("""\n}}<noinclude>
+        else: #bionic doesn't have an item. Which probably means it is a faulty bionic.
+            output.append( """<noinclude>{{Infobox/Bionics</noinclude>
+<includeonly>{{Row/Bionics</includeonly>
+|name=""" )
+            output.append(data[var]['name'])
+            output.append("\n|b_id=")
+            output.append(str(data[var]['id']))
+            output.append("\n|b_name=")
+            output.append(data[var]['name'])
+            if('capacity' in data[var]):
+                output.append("\n|capacity=")
+                output.append(str(data[var]['capacity']))
+            if('flags' in data[var]):
+                if('BIONIC_TOGGLED' in data[var]['flags']):
+                    output.append("\n|toggled=true")
+            if('flags' in data[var]):
+                if('BIONIC_POWER_SOURCE' in data[var]['flags']):
+                    output.append("\n|power_source=true")
+            if('act_cost' in data[var]):
+                output.append("\n|act_cost=")
+                output.append(str(data[var]['act_cost']))
+            if('react_cost' in data[var]):
+                output.append("\n|react_cost=")
+                output.append(str(data[var]['react_cost']))
+            if('time' in data[var]):
+                output.append("\n|time=")
+                output.append(str(data[var]['time']))
+            if('deact_cost' in data[var]):
+                output.append("\n|deact_cost=")
+                output.append(str(data[var]['deact_cost']))
+            if('flags' in data[var]):
+                if('BIONIC_FAULTY' in data[var]['flags']):
+                    output.append("\n|faulty=true")
+            if('description' in data[var]):
+                output.append("\n|b_description=")
+                output.append(str(data[var]['description']))
+
+        #footer
+        output.append("""\n}}<noinclude>
 ==Notes==
 """)
-                if('occupied_bodyparts' in data[var]):
-                    output.append("* Uses the following [[Bionics#Bionic_Slots|bionic slot(s)]]:\n")
-                    for it in range(0, len(data[var]["occupied_bodyparts"])):
-                        output.append("** {{btt|")
-                        output.append(str(data[var]["occupied_bodyparts"][it][0]))
-                        output.append("}} ")
-                        output.append(str(data[var]["occupied_bodyparts"][it][1]))
-                        output.append(".\n")
-                if('flags' in data[var]):
-                    if('BIONIC_FAULTY' in data[var]['flags']):
-                        output.append("* This is considered a [[Bionics#Malfunctioning_bionics|malfunctioning bionic]].\n")
-                if('capacity' in data[var]):
-                    output.append("* This bionic adds ")
-                    output.append(str(data[var]['capacity']))
-                    output.append(" capacity.\n")
-                if('flags' in data[var]):
-                    if('BIONIC_POWER_SOURCE' in data[var]['flags']):
-                        output.append("* This bionic a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
-                toggle = False
-                if('flags' in data[var]):
-                    if('BIONIC_TOGGLED' in data[var]['flags']):
-                        toggle = True
-                        output.append("* This bionic can be turned on, which might have an power cost.\n")
-                if(not toggle):
-                    if('act_cost' in data[var]):
-                        output.append("* This bionic can be turned on, which might have an power cost.\n")
-                if('react_cost' in data[var]):
-                    output.append("* This bionic can react automatically, which costs ")
-                    output.append(str(data[var]['react_cost']))
-                    output.append(" power units.\n")
-                if('included_bionics' in data[var]):
-                    output.append("* Installing this bionic also gives the")
-                    for it in range(0, len(data[var]["included_bionics"])):
-                        if (it > 0):
-                            output.append(",")
-                        output.append(" [[")
-                        output.append(ID_To_String(data[ID_To_Bio_Int(str(data[var]['included_bionics'][it]))]['id']))
-                        output.append("]]")
-                    output.append(" bionic")
-                    if (len(data[var]["included_bionics"]) > 1):
-                        output.append("s")
-                    output.append(".\n")
-                if('fake_item' in data[var]):
-                    output.append("* This gives the use of the following 'fake item' [http://cdda-trunk.chezzo.com/")
-                    output.append(str(data[var]['fake_item']))
-                    output.append(" ")
-                    output.append(str(data[var]['fake_item']))
-                    output.append("]")
-                    toggle = False
-                    if('flags' in data[var]):
-                        if('BIONIC_TOGGLED' in data[var]['flags']):
-                            toggle = True
-                            output.append(" when activated")
-                    if(not toggle):
-                        if('act_cost' in data[var]):
-                            output.append(" when activated")
-                    output.append(".\n")
-                if('flags' in data[var]):
-                    if('BIONIC_GUN' in data[var]['flags']):
-                        output.append("* This bionic counts as a gun.\n")
-                if('flags' in data[var]):
-                    if('BIONIC_WEAPON' in data[var]['flags']):
-                        output.append("* This bionic counts as a weapon.\n")
-                if('time' in data[var]):
-                    output.append("* This bionic has an over time effect.\n")
-                if('upgraded_bionic' in data[var]):
-                    output.append("* When installed this bionic upgrades the [[")
-                    output.append(ID_To_String(data[ID_To_Bio_Int(str(data[var]['upgraded_bionic']))]['id']))
-                    output.append("]] bionic. The old bionic will be removed.\n")
-                if('canceled_mutations' in data[var]):
-                    output.append("* When installed this bionic removes the following [[Mutation|mutations]]:\n")
-                    for it in range(0, len(data[var]["canceled_mutations"])):
-                        output.append("** [[")
-                        output.append(MUT_ID_To_String(str(data[var]["canceled_mutations"][it])))
-                        output.append("]]\n")
-                if('flags' in data[var]):
-                    if('BIONIC_ARMOR_INTERFACE' in data[var]['flags']):
-                        output.append("* This bionic can provide power to [[Power armor|powered armor]].\n")
+        if('occupied_bodyparts' in data[var]):
+            output.append("* Uses the following [[Bionics#Bionic_Slots|bionic slot(s)]]:\n")
+            for it in range(0, len(data[var]["occupied_bodyparts"])):
+                output.append("** {{btt|")
+                output.append(str(data[var]["occupied_bodyparts"][it][0]))
+                output.append("}} ")
+                output.append(str(data[var]["occupied_bodyparts"][it][1]))
+                output.append(".\n")
+        if('flags' in data[var]):
+            if('BIONIC_FAULTY' in data[var]['flags']):
+                output.append("* This is considered a [[Bionics#Malfunctioning_bionics|malfunctioning bionic]].\n")
+        if('capacity' in data[var]):
+            output.append("* This bionic adds ")
+            output.append(str(data[var]['capacity']))
+            output.append(" capacity.\n")
+        if('flags' in data[var]):
+            if('BIONIC_POWER_SOURCE' in data[var]['flags']):
+                output.append("* This bionic a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
+        toggle = False
+        if('flags' in data[var]):
+            if('BIONIC_TOGGLED' in data[var]['flags']):
+                toggle = True
+                output.append("* This bionic can be turned on, which might have an power cost.\n")
+        if(not toggle):
+            if('act_cost' in data[var]):
+                output.append("* This bionic can be turned on, which might have an power cost.\n")
+        if('react_cost' in data[var]):
+            output.append("* This bionic can react automatically, which costs ")
+            output.append(str(data[var]['react_cost']))
+            output.append(" power units.\n")
+        if('included_bionics' in data[var]):
+            output.append("* Installing this bionic also gives the")
+            for it in range(0, len(data[var]["included_bionics"])):
+                if (it > 0):
+                    output.append(",")
+                output.append(" [[")
+                output.append(ID_To_String(data[ID_To_Bio_Int(str(data[var]['included_bionics'][it]))]['id']))
+                output.append("]]")
+            output.append(" bionic")
+            if (len(data[var]["included_bionics"]) > 1):
+                output.append("s")
+            output.append(".\n")
+        if('fake_item' in data[var]):
+            output.append("* This gives the use of the following 'fake item' [http://cdda-trunk.chezzo.com/")
+            output.append(str(data[var]['fake_item']))
+            output.append(" ")
+            output.append(str(data[var]['fake_item']))
+            output.append("]")
+            toggle = False
+            if('flags' in data[var]):
+                if('BIONIC_TOGGLED' in data[var]['flags']):
+                    toggle = True
+                    output.append(" when activated")
+            if(not toggle):
+                if('act_cost' in data[var]):
+                    output.append(" when activated")
+            output.append(".\n")
+        if('flags' in data[var]):
+            if('BIONIC_GUN' in data[var]['flags']):
+                output.append("* This bionic counts as a gun.\n")
+        if('flags' in data[var]):
+            if('BIONIC_WEAPON' in data[var]['flags']):
+                output.append("* This bionic counts as a weapon.\n")
+        if('time' in data[var]):
+            output.append("* This bionic has an over time effect.\n")
+        if('upgraded_bionic' in data[var]):
+            output.append("* When installed this bionic upgrades the [[")
+            output.append(ID_To_String(data[ID_To_Bio_Int(str(data[var]['upgraded_bionic']))]['id']))
+            output.append("]] bionic. The old bionic will be removed.\n")
+        if('canceled_mutations' in data[var]):
+            output.append("* When installed this bionic removes the following [[Mutation|mutations]]:\n")
+            for it in range(0, len(data[var]["canceled_mutations"])):
+                output.append("** [[")
+                output.append(MUT_ID_To_String(str(data[var]["canceled_mutations"][it])))
+                output.append("]]\n")
+        if('flags' in data[var]):
+            if('BIONIC_ARMOR_INTERFACE' in data[var]['flags']):
+                output.append("* This bionic can provide power to [[Power armor|powered armor]].\n")
 
-                output.append("""<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->
+        output.append("""<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->
 
 [[Category:CBMs]]
 {{footer/CBM}}
