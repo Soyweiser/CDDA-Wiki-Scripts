@@ -229,7 +229,7 @@ while True:
             output.append(" capacity.\n")
         if('flags' in data[var]):
             if('BIONIC_POWER_SOURCE' in data[var]['flags']):
-                output.append("* This bionic a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
+                output.append("* This bionic is a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
         toggle = False
         if('flags' in data[var]):
             if('BIONIC_TOGGLED' in data[var]['flags']):
