@@ -286,8 +286,12 @@ while True:
                 output.append(str(data[var]['cost']))
                 if( "fatigue" in data[var] ):
                     output.append(" fatigue")
+                    if( "hunger" in data[var] or "thirst" in data[var]):
+                        output.append(", ")
                 if( "hunger" in data[var] ):
                     output.append(" hunger")
+                    if("thirst" in data[var]):
+                        output.append(", ")
                 if( "thirst" in data[var] ):
                     output.append(" thirst")
                 output.append(" points.")
