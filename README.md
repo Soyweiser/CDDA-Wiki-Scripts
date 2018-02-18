@@ -66,6 +66,7 @@ bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Mutagen
 mutationtable.py -> Template:Mutationtable
 foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
+techniques.py -> Template:TECtoname page.
 
 #Troubleshooting
 
