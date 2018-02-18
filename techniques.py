@@ -24,8 +24,6 @@ Template for converting Technique identifiers to their associated names.
 
 header = '''<includeonly>{{#switch:{{lc:{{{1}}}}}'''
 
-
-
 output = [ "" ]
 output.append(header)
 for iterator in range(0, len(data)):
