@@ -58,7 +58,7 @@ for iterator in range(0, len(list_categories)):
     traits['mutations'] = list()
     traits['threshold'] = list()
     mut_trait[list_categories[iterator]] = traits
-    
+
 mut_neutral = list()
 
 for iterator in range(0, len(data)):

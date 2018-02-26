@@ -1,5 +1,6 @@
 import json
 import sys
+from version import version
 from pprint import pprint
 from Tkinter import Tk
 root = Tk()
@@ -87,10 +88,6 @@ while True:
             root.destroy()
             exit()
         output = []
-        
-#        if(ID_To_Item_Int(data[var]['id']) == -1):
-#            sys.stdout.write("bionic does not have an CBM item, use bionicsFaulty.py to generate instead.")
-
         #Add item if this bionic is made from an item.
         if(ID_To_Item_Int(data[var]['id']) != -1):
             item_id = ID_To_Item_Int(data[var]['id'])
@@ -295,8 +292,9 @@ while True:
 
 [[Category:CBMs]]
 {{footer/CBM}}
-{{ver|0.D}}
-</noinclude>""")
+""")
+        output.append(version)
+        output.append("</noinclude>")
                 
         text = "".join(output)
         text.replace("\n", "\\n")

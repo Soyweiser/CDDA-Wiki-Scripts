@@ -1,0 +1,1 @@
+version = "{{ver|0.D}}\n"
