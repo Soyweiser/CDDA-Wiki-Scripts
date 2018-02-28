@@ -6,7 +6,7 @@ root.withdraw()
 
 #data is copied to clipboard, used for the Template:Materialtoname
 
-with open('data/json/materials.json') as data_file:    
+with open('data/json/materials.json') as data_file:
     data = json.load(data_file)
 
 output = [ "" ]

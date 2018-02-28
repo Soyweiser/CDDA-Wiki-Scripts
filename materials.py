@@ -6,7 +6,7 @@ root.withdraw()
 
 #data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Materials page
 
-with open('data/json/materials.json') as data_file:    
+with open('data/json/materials.json') as data_file:
     data = json.load(data_file)
 
 output = [ "" ]
@@ -34,8 +34,7 @@ for it in range(0, len(data)):
             output.append("|edible=Y")
     if('soft' in  data[it]):
         if(data[it]['soft'] == True):
-            output.append("|soft=Y")        
-        
+            output.append("|soft=Y")
     output.append("}}\n\n")
 
 text = "".join(output)

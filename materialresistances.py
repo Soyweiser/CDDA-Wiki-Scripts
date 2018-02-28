@@ -8,7 +8,7 @@ root.withdraw()
 #data is copied to clipboard, used for the Template:Matbashres, Matfireres, Matcutres, Matelecres, Matacidres
 #takes a command line argument, must be the json data field you are interested in. for example 'acid_resist'
 
-with open('data/json/materials.json') as data_file:    
+with open('data/json/materials.json') as data_file:
     data = json.load(data_file)
 
 output = [ "" ]

@@ -1,12 +1,13 @@
 import json
 import sys
 import pywikibot
+from version import version
 
 #Data is automatically copied to the wiki template page.
 #Usage: python [location of pywikibotinstall]\pwb.py mutationtable.py
 #   Then input your password, and wait for the page to be updated.
 
-with open('data/json/mutations.json') as data_file:    
+with open('data/json/mutations.json') as data_file:
     data = json.load(data_file)
 
 list_categories = [ 'Lizard', 'Bird', 'Fish', 'Beast', 'Feline', 'Lupine', 'Ursine', 'Cattle', 'Insect', 'Plant', 'Slime (Mutation category)|Slime', 'Troglobite_(Mutation_category)|Troglobite', 'Cephalopod', 'Spider', 'Rat', 'Medical', 'Alpha', 'Elf-A', 'Chimera', 'Raptor', 'Mycus', 'Marloss' ]
@@ -144,9 +145,10 @@ for it in range(0, len(mut_neutral)):
 
 output.append("""\n        -->\n}}<noinclude>
 <!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts -->
-[[Category:Navigational templates]]
-</noinclude>""")
-    
+[[Category:Navigational templates]]\n""")
+output.append(version)
+output.append("</noinclude>")
+
 text = "".join(output)
 text.replace("\n", "\\n")
 site = pywikibot.Site('en', 'cddawiki')
