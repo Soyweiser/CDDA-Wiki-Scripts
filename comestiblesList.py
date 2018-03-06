@@ -28,7 +28,7 @@ def check_duplicates(x,y): #check if there are duplicate ID's which might mess t
                         print id
                         print ".\n"
 
-def setAbstractIds(): #some items have no ID value set, which this code depends on, but they do have an abstract. This function copies the abstract value into the id value.
+def setAbstractIds(data): #some items have no ID value set, which this code depends on, but they do have an abstract. This function copies the abstract value into the id value.
     for it in range(0, len(data)):
         if(not 'id' in data[it]):
             if('abstract' in data[it]):
@@ -37,6 +37,7 @@ def setAbstractIds(): #some items have no ID value set, which this code depends 
                 print 'both no id and no abstract detected '
                 print it
                 print '.\n'
+    return data
 
 ID_to_item = dict()
 def ID_To_Item_Int(id): #should return the location of the item inside the items list. Input, string containing the item Id, returns, int location in the data list.
@@ -45,13 +46,15 @@ def ID_To_Item_Int(id): #should return the location of the item inside the items
     else:
         return -1
 
-def fill_ID_to_item ():
+def fill_ID_to_item (data):
+    retval = dict()
     for it in range(0, len(data)):
         keyD = dict()
         keyD['id_nr'] = it
         keyD["name"] = data[it]["name"]
         if ('id' in data[it]):
-            ID_to_item[data[it]["id"]] = keyD
+            retval[data[it]["id"]] = keyD
+    return retval
 
 def getValue(id, value): #returns the value field of the item. It is a recursive function that takes into account the abstract item.
     if(value in data[id]):
@@ -155,8 +158,8 @@ for it in range(0, len(list_comestibles_files)):
         new_data = json.load(data_file)
         check_duplicates (data, new_data)
         data = merge_json_data(data, new_data)
-setAbstractIds()
-fill_ID_to_item()
+data = setAbstractIds(data)
+ID_to_item = fill_ID_to_item(data)
 
 ID_masterlist = list()
 for it in range(0, len(data)):

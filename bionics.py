@@ -79,6 +79,12 @@ def checkValue(id, value): #returns if the value field is defined in the item de
     else:
         return False
 
+def hasFlag (object, flag): #returns true if this json object has the flag defined in its "flags" list.
+    if('flags' in object):
+        if(flag in object['flags']):
+            return True
+    return False
+
 var = raw_input(">")
 while True:
     while var.isdigit():
@@ -121,12 +127,10 @@ while True:
                 if('capacity' in data[var]):
                     output.append("\n|capacity=")
                     output.append(str(data[var]['capacity']))
-                if('flags' in data[var]):
-                    if('BIONIC_TOGGLED' in data[var]['flags']):
-                        output.append("\n|toggled=true")
-                if('flags' in data[var]):
-                    if('BIONIC_POWER_SOURCE' in data[var]['flags']):
-                        output.append("\n|power_source=true")
+                if(hasFlag(data[var], 'BIONIC_TOGGLED')):
+                    output.append("\n|toggled=true")
+                if(hasFlag(data[var], 'BIONIC_POWER_SOURCE')):
+                    output.append("\n|power_source=true")
                 if('act_cost' in data[var]):
                     output.append("\n|act_cost=")
                     output.append(str(data[var]['act_cost']))
@@ -139,9 +143,8 @@ while True:
                 if('deact_cost' in data[var]):
                     output.append("\n|deact_cost=")
                     output.append(str(data[var]['deact_cost']))
-                if('flags' in data[var]):
-                    if('BIONIC_FAULTY' in data[var]['flags']):
-                        output.append("\n|faulty=true")
+                if(hasFlag(data[var], 'BIONIC_FAULTY')):
+                    output.append("\n|faulty=true")
                 if(checkValue(item_id,'price')):
                     output.append("\n|price=")
                     output.append(str(getValue(item_id,'price')))
@@ -180,12 +183,10 @@ while True:
             if('capacity' in data[var]):
                 output.append("\n|capacity=")
                 output.append(str(data[var]['capacity']))
-            if('flags' in data[var]):
-                if('BIONIC_TOGGLED' in data[var]['flags']):
-                    output.append("\n|toggled=true")
-            if('flags' in data[var]):
-                if('BIONIC_POWER_SOURCE' in data[var]['flags']):
-                    output.append("\n|power_source=true")
+            if(hasFlag(data[var], 'BIONIC_TOGGLED')):
+                output.append("\n|toggled=true")
+            if(hasFlag(data[var], 'BIONIC_POWER_SOURCE')):
+                output.append("\n|power_source=true")
             if('act_cost' in data[var]):
                 output.append("\n|act_cost=")
                 output.append(str(data[var]['act_cost']))
@@ -198,9 +199,8 @@ while True:
             if('deact_cost' in data[var]):
                 output.append("\n|deact_cost=")
                 output.append(str(data[var]['deact_cost']))
-            if('flags' in data[var]):
-                if('BIONIC_FAULTY' in data[var]['flags']):
-                    output.append("\n|faulty=true")
+            if(hasFlag(data[var], 'BIONIC_FAULTY')):
+                output.append("\n|faulty=true")
             if('description' in data[var]):
                 output.append("\n|b_description=")
                 output.append(str(data[var]['description']))
@@ -217,21 +217,18 @@ while True:
                 output.append("}} ")
                 output.append(str(data[var]["occupied_bodyparts"][it][1]))
                 output.append(".\n")
-        if('flags' in data[var]):
-            if('BIONIC_FAULTY' in data[var]['flags']):
-                output.append("* This is considered a [[Bionics#Malfunctioning_bionics|malfunctioning bionic]].\n")
+        if(hasFlag(data[var], 'BIONIC_FAULTY')):
+            output.append("* This is considered a [[Bionics#Malfunctioning_bionics|malfunctioning bionic]].\n")
         if('capacity' in data[var]):
             output.append("* This bionic adds ")
             output.append(str(data[var]['capacity']))
             output.append(" capacity.\n")
-        if('flags' in data[var]):
-            if('BIONIC_POWER_SOURCE' in data[var]['flags']):
-                output.append("* This bionic is a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
+        if(hasFlag(data[var], 'BIONIC_POWER_SOURCE')):
+            output.append("* This bionic is a source of power. The actual type of power source depends on the item. Could be solar, kinetic, atomics, or anything else.\n")
         toggle = False
-        if('flags' in data[var]):
-            if('BIONIC_TOGGLED' in data[var]['flags']):
-                toggle = True
-                output.append("* This bionic can be turned on, which might have an power cost.\n")
+        if(hasFlag(data[var], 'BIONIC_TOGGLED')):
+            toggle = True
+            output.append("* This bionic can be turned on, which might have an power cost.\n")
         if(not toggle):
             if('act_cost' in data[var]):
                 output.append("* This bionic can be turned on, which might have an power cost.\n")
@@ -258,20 +255,17 @@ while True:
             output.append(str(data[var]['fake_item']))
             output.append("]")
             toggle = False
-            if('flags' in data[var]):
-                if('BIONIC_TOGGLED' in data[var]['flags']):
-                    toggle = True
-                    output.append(" when activated")
+            if(hasFlag(data[var], 'BIONIC_TOGGLED')):
+                toggle = True
+                output.append(" when activated")
             if(not toggle):
                 if('act_cost' in data[var]):
                     output.append(" when activated")
             output.append(".\n")
-        if('flags' in data[var]):
-            if('BIONIC_GUN' in data[var]['flags']):
-                output.append("* This bionic counts as a gun.\n")
-        if('flags' in data[var]):
-            if('BIONIC_WEAPON' in data[var]['flags']):
-                output.append("* This bionic counts as a weapon.\n")
+        if(hasFlag(data[var], 'BIONIC_GUN')):
+            output.append("* This bionic counts as a gun.\n")
+        if(hasFlag(data[var], 'BIONIC_WEAPON')):
+            output.append("* This bionic counts as a weapon.\n")
         if('time' in data[var]):
             output.append("* This bionic has an over time effect.\n")
         if('upgraded_bionic' in data[var]):
@@ -284,9 +278,8 @@ while True:
                 output.append("** [[")
                 output.append(MUT_ID_To_String(str(data[var]["canceled_mutations"][it])))
                 output.append("]]\n")
-        if('flags' in data[var]):
-            if('BIONIC_ARMOR_INTERFACE' in data[var]['flags']):
-                output.append("* This bionic can provide power to [[Power armor|powered armor]].\n")
+        if(hasFlag(data[var], 'BIONIC_ARMOR_INTERFACE')):
+            output.append("* This bionic can provide power to [[Power armor|powered armor]].\n")
 
         output.append("""<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->
 
