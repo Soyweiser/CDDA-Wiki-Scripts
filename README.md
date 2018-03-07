@@ -67,6 +67,7 @@ comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Te
 mutationtable.py -> Template:Mutationtable
 foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
 techniques.py -> Template:TECtoname page.
+speciestoname.py -> Template:Speciestoname
 
 #Troubleshooting
 
