@@ -119,7 +119,7 @@ while True:
             if( not "abstract" in data[id]):
                 output.append( """<noinclude>{{enemydescription</noinclude>
 <includeonly>{{Row/Enemies1</includeonly>""")
-                output.append("|name="+getValue(id,'name'))
+                output.append("\n|name="+getValue(id,'name'))
                 output.append("\n|id="+getValue(id, 'id'))
                 if(checkValue(id, 'symbol')):
                     output.append("\n|glyph=<nowiki>"+getValue(id, 'symbol')+"</nowiki>")
@@ -183,7 +183,8 @@ while True:
                         if( isinstance( attacks[it], list)):
                             output.append(attacks[it][0])
                         elif( isinstance( attacks[it], dict)):
-                            output.append(attacks[it]['type'])
+                            if('type' in attacks[it]):
+                                output.append(attacks[it]['type'])
                     output.append("\n|specialtime=")
                     for it in range(0, len(attacks)):
                         if (it > 0):
@@ -191,8 +192,8 @@ while True:
                         if( isinstance( attacks[it], list)):
                             output.append(str(attacks[it][1]))
                         elif( isinstance( attacks[it], dict)):
-                            output.append(str(attacks[it]['cooldown']))
-                    
+                            if('cooldown' in attacks[it]):
+                                output.append(str(attacks[it]['cooldown']))
                 if(checkValue(id, 'morale')):
                     output.append("\n|morale="+str(getValue(id, 'morale')))
                 if(checkValue(id, 'default_faction')):
