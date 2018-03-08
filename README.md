@@ -50,6 +50,10 @@ Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/i
 
 Data is copied to clipboard, used for the Template:Materialtoname
 
+## monsters.py
+
+Data is copied to clipboard, Used to create the a monster page. Does need some manual editing.
+
 ## mutationthresholds.py
 
 Data is copied to clipboard, Used to create the various lists for the threshold pages.
