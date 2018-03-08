@@ -86,6 +86,12 @@ def species_tostring (id):
             return species[it]['name']
     return "species not found"
 
+def species_categories (species_list): #species_list is a list of species, prints a list of categories
+    retval = ""
+    for it in range(0, len(species_list)):
+        retval += "[[Category:"+species_tostring(species_list[it])+"]]\n"
+    return retval
+
 output = []
 
 for it in range(0, len(list_monster_files)):
@@ -128,12 +134,12 @@ while True:
                 if(checkValue(id, 'hp')):
                     output.append("\n|hitpoints="+str(getValue(id, 'hp')))
                 if(checkValue(id, 'species')):
-                    species = getValue(id, 'species')
+                    species_list = getValue(id, 'species')
                     output.append("\n|species=")
-                    for it in range(0, len(species)):
+                    for it in range(0, len(species_list)):
                         if (it > 0):
                             output.append(", ")
-                        output.append(species[it])
+                        output.append(species_list[it])
                 if(checkValue(id, 'size')):
                     output.append("\n|size="+getValue(id, 'size'))
                 if(checkValue(id, 'material')):
@@ -143,6 +149,8 @@ while True:
                         if (it > 0):
                             output.append(", ")
                         output.append(mat[it])
+                if(checkValue(id, 'phase')):
+                    output.append("\n|phase="+getValue(id, 'phase').lower())
                 if(checkValue(id, 'diff')):
                     output.append("\n|difficulty="+str(getValue(id, 'diff')))
                 if(checkValue(id, 'aggression')):
@@ -176,19 +184,15 @@ while True:
                         output.append(flags[it])
                 if(checkValue(id, 'special_attacks')):
                     attacks = getValue(id, 'special_attacks')
-                    output.append("\n|specialabil=")
                     for it in range(0, len(attacks)):
-                        if (it > 0):
-                            output.append(", ")
+                        output.append("\n|specialabil"+str(it+1)+"=")
                         if( isinstance( attacks[it], list)):
                             output.append(attacks[it][0])
                         elif( isinstance( attacks[it], dict)):
                             if('type' in attacks[it]):
                                 output.append(attacks[it]['type'])
-                    output.append("\n|specialtime=")
                     for it in range(0, len(attacks)):
-                        if (it > 0):
-                            output.append(", ")
+                        output.append("\n|specialtime"+str(it+1)+"=")
                         if( isinstance( attacks[it], list)):
                             output.append(str(attacks[it][1]))
                         elif( isinstance( attacks[it], dict)):
@@ -213,9 +217,9 @@ while True:
 <!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->
 
 {{Enemies}}
-[[Category:]]
-"""+version+"""</noinclude>""")
-                
+"""+species_categories(getValue(id, 'species'))+version+"""</noinclude>""")
+
+
         text = "".join(output)
         text.replace("\n", "\\n")
         print text
