@@ -10,7 +10,7 @@ from version import version
 #Usage: python [location of pywikibotinstall]\pwb.py comestiblesList.py
 #   Then input your password, and wait for the page to be updated.
 
-list_comestibles_files = [ 'data/json/items/comestibles.json', 'data/json/items/comestibles/brewing.json', 'data/json/items/comestibles/carnivore.json', 'data/json/items/comestibles/drink.json', 'data/json/items/comestibles/med.json', 'data/json/items/comestibles/mutagen.json', 'data/json/items/comestibles/protein.json', 'data/json/items/comestibles/seed.json', 'data/json/items/comestibles/spice.json', 'data/json/items/classes/comestible.json', 'data/core/basic.json' ]
+list_comestibles_files = [ 'data/json/items/comestibles.json', 'data/json/items/comestibles/brewing.json', 'data/json/items/comestibles/carnivore.json', 'data/json/items/comestibles/drink.json', 'data/json/items/comestibles/egg.json', 'data/json/items/comestibles/med.json', 'data/json/items/comestibles/mutagen.json', 'data/json/items/comestibles/protein.json', 'data/json/items/comestibles/seed.json', 'data/json/items/comestibles/spice.json', 'data/json/items/classes/comestible.json', 'data/core/basic.json' ]
 data = list()
 
 def merge_json_data(x,y): #expects two lists
@@ -105,7 +105,7 @@ def getNutrition(id):
         return retval
     return 0
 
-def getMaterialsString(id): #Returns a list of strings. Because that is why my code uses.
+def getMaterialsString(id): #Returns a list of strings. Because that is what my code uses.
     retval = [ "" ]
     if (checkValue(id,'material')):
         if (isinstance(getValue(id,'material'), list)):
@@ -124,7 +124,7 @@ def getMaterialsString(id): #Returns a list of strings. Because that is why my c
         retval.append("none")
     return retval
 
-def getUseFunctionString(id): #Returns a list of strings. Because that is why my code uses.
+def getUseFunctionString(id): #Returns a list of strings. Because that is what my code uses.
 #Healing items are just listed as 'healing item' (see item). (as they have a pretty big list of results, and not all that interesting, and these results are visible ingame).
 #Drugs have their various effects listed, which in contrast to the healing items, vary wildly, and cannot be seen ingame.
 #Double check if all the options are properly listed in 'Template:Usefunctiontotext'. Please add any missing ones.
@@ -135,6 +135,10 @@ def getUseFunctionString(id): #Returns a list of strings. Because that is why my
             if('type' in useaction):
                 if(useaction['type'] == 'heal'):
                     retval.append("Healing item (see item)")
+                elif(useaction['type'] == 'mutagen_iv'):
+                    retval.append("MUT_IV")
+                elif(useaction['type'] == 'mutagen'):
+                    retval.append("MUTAGEN")
                 elif(useaction['type'] == 'consume_drug'):
                     if('effects' in useaction):
                         for it in range(0, len(useaction['effects'])):
@@ -168,37 +172,69 @@ ID_masterlist = sorted(ID_masterlist, key=string.lower)
 
 ID_comes = list()
 for it in range(0, len(data)):
-    if(getValue(it,'comestible_type')):
+    if(checkValue(it,'comestible_type')):
         if ('FOOD' == getValue(it,'comestible_type')):
-            ID_comes.append(data[it]["id"])
+            if(not checkValue(it, 'seed_data')): #Seeds go into a different list.
+                ID_comes.append(data[it]["id"])
 ID_comes = sorted(ID_comes, key=string.lower)
+
+ID_seeds = list()
+for it in range(0, len(data)):
+    if(checkValue(it,'comestible_type')):
+        if ('FOOD' == getValue(it,'comestible_type')):
+            if(checkValue(it, 'seed_data')):
+                ID_seeds.append(data[it]["id"])
+ID_seeds = sorted(ID_seeds, key=string.lower)
 
 ID_drinks = list()
 for it in range(0, len(data)):
-    if(getValue(it, 'comestible_type')):
+    if(checkValue(it, 'comestible_type')):
         if ('DRINK' == getValue(it, 'comestible_type')):
             ID_drinks.append(data[it]["id"])
 ID_drinks = sorted(ID_drinks, key=string.lower)
 
 ID_meds = list()
 for it in range(0, len(data)):
-    if(getValue(it, 'comestible_type')):
+    if(checkValue(it, 'comestible_type')):
         if ('MED' == getValue(it, 'comestible_type')):
             ID_meds.append(data[it]["id"])
 ID_meds = sorted(ID_meds, key=string.lower)
 
 ID_mutagen = list()
 for it in range(0, len(data)):
-    if(getValue(it, 'use_action')):
-        if ('MUTAGEN' == getValue(it, 'use_action')):
+    if(checkValue(it, 'use_action')):
+        use_action = getValue(it, 'use_action')
+        if ((use_action == 'MUTAGEN') or (use_action == 'MUT_IV') or (use_action == 'PURIFY_IV') or (use_action == 'PURIFIER')): #I think these mutation useactions have been moved into a json dictionary, but I kept them in here just to be complete.
             ID_mutagen.append(data[it]["id"])
-        elif ('MUT_IV' == getValue(it, 'use_action')):
-            ID_mutagen.append(data[it]["id"])
-        elif ('PURIFY_IV' == getValue(it, 'use_action')):
-            ID_mutagen.append(data[it]["id"])
-        elif ('PURIFIER' == getValue(it, 'use_action')):
-            ID_mutagen.append(data[it]["id"])
+        elif (type(use_action) is dict):
+            if (use_action['type'] == 'mutagen_iv' or use_action['type'] == 'mutagen'):
+                ID_mutagen.append(data[it]["id"])
 ID_mutagen = sorted(ID_mutagen, key=string.lower)
+
+#Check which ID's are not used in any of the lists. (might indicate missing information).
+ID_not_used = list()
+for it in range(0, len(data)):
+    used = False
+    if(checkValue(it, 'use_action')):
+        use_action = getValue(it, 'use_action')
+        if ((use_action == 'MUTAGEN') or (use_action == 'MUT_IV') or (use_action == 'PURIFY_IV') or (use_action == 'PURIFIER')):
+            used = True
+        elif (type(use_action) is dict):
+            if (use_action['type'] == 'mutagen_iv' or use_action['type'] == 'mutagen'):
+                used = True
+    if(checkValue(it, 'comestible_type')):
+        com_type = getValue(it, 'comestible_type')
+        if ((com_type == 'MED') or (com_type == 'FOOD') or (com_type == 'DRINK')):
+            used = True
+    if (not used):
+        ID_not_used.append(data[it]["id"])
+ID_not_used = sorted(ID_not_used, key=string.lower)
+#Print the unused id's. (Some will show up but aren't a problem, like water, as it is also defined as ammo in 'data\core\basic.json').
+#It will be best to document which ones are and aren't a problem somewhere. (TODO).
+if (len(ID_not_used) > 0):
+    print "Unused ID's detected, (" + str(len(ID_not_used)) + "):"
+    for it in range(0, len(ID_not_used)):
+        print str(it+1) + ": " + ID_not_used[it]
 
 header = '''<!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts ComestiblesList.py -->\n\n'''
 footer = '''</table>
@@ -275,6 +311,94 @@ output.append(footer)
 Foodtext = "".join(output)
 Foodtext.replace("\n", "\\n")
 #print Foodtext
+
+##Seed list
+output = [ "" ]
+output.append("{{header/Comestibles|seeds}}\n")
+output.append(header)
+#(row data) name/price/materials/volume/weight/quench/nut/spoils/health/addiction/fun/function/fruit/grow
+for it in range(0, len(ID_seeds)):
+    id = ID_To_Item_Int(ID_seeds[it])
+    if(not 'abstract' in data[id]): #don't print abstract items.
+        output.append("<!--"+ID_seeds[it]+"-->")
+        output.append("{{row/Seeds|")
+        output.append(getValue(id,'name'))
+        output.append("|")
+        output.append(str(getValueRecursive(id,'price')))
+        output.append("|")
+        output.append(getValue(id,'color'))
+        output.append("|")
+        output.extend(getMaterialsString(id))
+        output.append("|")
+        if(checkValue(id,'container')): #containers
+            output.append(str(getValue(id,'container')))
+        else:
+            output.append("itm_null")
+        output.append("|")
+        output.append(str(getValueRecursive(id,'volume')))
+        output.append("|")
+        output.append(str(getValueRecursive(id,'weight')))
+        output.append("|")
+        output.append(str(getValueRecursive(id,'quench')))
+        output.append("|")
+        output.append(str(getNutrition(id))) #due to calories and nutrition being used, this is a special case.
+        output.append("|")
+        output.append(str(getValueOrZero(id,'spoils_in')))
+        output.append("|")
+        output.append(str(getValueOrZero(id,'stim')))
+        output.append("|")
+        output.append(str(getValueOrZero(id,'healthy')))
+        output.append("|")
+        output.append(str(getValueOrZero(id,'addiction_potential')))
+        output.append("|")
+        charges = getValueOrZero(id,'charges')
+        if(charges == 0):
+            charges = 1
+        output.append(str(charges))
+        output.append("|")
+        output.append(str(getValueRecursive(id,'fun')))
+        output.append("|")
+        output.extend(getUseFunctionString(id))
+        output.append("|")
+        if(checkValue(id,'addiction_type')):
+            output.append(str(getValue(id,'addiction_type')))
+        else:
+            output.append("ADD_NULL")
+        output.append("|")
+        output.append(str(getValue(id,'description')))
+        output.append("|")
+        if( not getValueOrZero(id, 'weight') == 0 ):
+            output.append(str(math.ceil(float(getValueOrZero(id, 'nutrition') / float(getValueOrZero(id, 'weight')))*100)/100))
+        else:
+            output.append("!")
+        output.append("|")
+        output.append(str(getValueRecursive(id,'parasites')))
+        if(checkValue(id,'price_postapoc')):
+            output.append("|trade_price=")
+            output.append(str(getValueRecursive(id,'price_postapoc')))
+        if(checkValue(id,'seed_data')):
+            seed_data = getValue(id, 'seed_data')
+            if(not seed_data['fruit'] == 'null'): #there are special cases
+                output.append("|fruit=[[")
+                if(seed_data['fruit'] in ID_to_item):
+                    output.append(str(getValue(ID_To_Item_Int(seed_data['fruit']),'name')))
+                else:
+                    print str(seed_data['fruit']) + " not found in ID_to_item list"
+                    output.append(str(seed_data['fruit']))
+                output.append("]]")
+            else:
+                output.append("|fruit=See item")
+            if('seeds' in seed_data):
+                output.append("|seeds=")
+                output.append(str(seed_data['seeds']))
+            if('grow' in seed_data):
+                output.append("|grow=")
+                output.append(str(seed_data['grow']))
+        output.append("}}\n")
+output.append(footer)
+
+Seedtext = "".join(output)
+Seedtext.replace("\n", "\\n")
 
 ##Drinks list
 output = [ "" ]
@@ -461,6 +585,9 @@ Mutagentext.replace("\n", "\\n")
 site = pywikibot.Site('en', 'cddawiki')
 page = pywikibot.Page(site, 'Template:Comestibles/Food')
 page.text = Foodtext
+page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts ComestiblesList.py script')
+page = pywikibot.Page(site, 'Template:Comestibles/Seeds')
+page.text = Seedtext
 page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts ComestiblesList.py script')
 page = pywikibot.Page(site, 'Template:Comestibles/Drinks')
 page.text = Drinktext
