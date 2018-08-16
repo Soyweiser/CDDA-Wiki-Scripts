@@ -230,51 +230,50 @@ while True:
             output.append('|purifiable=1')
         
         if( "category" in data[var]):
-            if( "MUTCAT_LIZARD" in data[var]["category"] ):
+            if( "LIZARD" in data[var]["category"] ):
                 output.append('|lizard=1')
-            if( "MUTCAT_BIRD" in data[var]["category"] ):
+            if( "BIRD" in data[var]["category"] ):
                 output.append('|bird=1')
-            if( "MUTCAT_FISH" in data[var]["category"] ):
+            if( "FISH" in data[var]["category"] ):
                 output.append('|fish=1')
-            if( "MUTCAT_BEAST" in data[var]["category"] ):
+            if( "BEAST" in data[var]["category"] ):
                 output.append('|beast=1')
-            if( "MUTCAT_FELINE" in data[var]["category"] ):
+            if( "FELINE" in data[var]["category"] ):
                 output.append('|feline=1')
-            if( "MUTCAT_LUPINE" in data[var]["category"] ):
+            if( "LUPINE" in data[var]["category"] ):
                 output.append('|lupine=1')
-            if( "MUTCAT_URSINE" in data[var]["category"] ):
+            if( "URSINE" in data[var]["category"] ):
                 output.append('|ursine=1')
-            if( "MUTCAT_CATTLE" in data[var]["category"] ):
+            if( "CATTLE" in data[var]["category"] ):
                 output.append('|cattle=1')
-            if( "MUTCAT_INSECT" in data[var]["category"] ):
+            if( "INSECT" in data[var]["category"] ):
                 output.append('|insect=1')
-            if( "MUTCAT_PLANT" in data[var]["category"] ):
+            if( "PLANT" in data[var]["category"] ):
                 output.append('|plant=1')
-            if( "MUTCAT_SLIME" in data[var]["category"] ):
+            if( "SLIME" in data[var]["category"] ):
                 output.append('|slime=1')
-            if( "MUTCAT_TROGLOBITE" in data[var]["category"] ):
+            if( "TROGLOBITE" in data[var]["category"] ):
                 output.append('|troglobite=1')
-            if( "MUTCAT_CEPHALOPOD" in data[var]["category"] ):
+            if( "CEPHALOPOD" in data[var]["category"] ):
                 output.append('|cephalopod=1')
-            if( "MUTCAT_SPIDER" in data[var]["category"] ):
+            if( "SPIDER" in data[var]["category"] ):
                 output.append('|spider=1')
-            if( "MUTCAT_MEDICAL" in data[var]["category"] ):
+            if( "MEDICAL" in data[var]["category"] ):
                 output.append('|medical=1')
-            if( "MUTCAT_ALPHA" in data[var]["category"] ):
+            if( "ALPHA" in data[var]["category"] ):
                 output.append('|alpha=1')
-            if( "MUTCAT_ELFA" in data[var]["category"] ):
+            if( "ELFA" in data[var]["category"] ):
                 output.append('|elfa=1')
-            if( "MUTCAT_CHIMERA" in data[var]["category"] ):
+            if( "CHIMERA" in data[var]["category"] ):
                 output.append('|chimera=1')
-            if( "MUTCAT_RAPTOR" in data[var]["category"] ):
+            if( "RAPTOR" in data[var]["category"] ):
                 output.append('|raptor=1')
-            if( "MUTCAT_RAT" in data[var]["category"] ):
+            if( "RAT" in data[var]["category"] ):
                 output.append('|rat=1')
-            if( "MUTCAT_MYCUS" in data[var]["category"] ):
+            if( "MYCUS" in data[var]["category"] ):
                 output.append('|mycus=1')
-            if( "MUTCAT_MARLOSS" in data[var]["category"] ):
-                output.append('|marloss=1')                
-            
+            if( "MARLOSS" in data[var]["category"] ):
+                output.append('|marloss=1')
         output.append("}}\n<noinclude>\n==Notes==\n")
         #Active
         if( "active" in data[var] ):
