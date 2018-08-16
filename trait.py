@@ -533,6 +533,22 @@ while True:
             else:
                 print(type(data[var]["attacks"]))
                 output.extend(Attack_To_String(data[var]["attacks"]))
+        #Convert social modifiers.
+        if( "social_modifiers" in data[var] ):
+            if (isinstance(data[var]["social_modifiers"], dict)):
+                if( "lie" in data[var]['social_modifiers'] ):
+                    output.extend("* Increases chance of lying to [[NPC]]s by ")
+                    output.extend(str(data[var]['social_modifiers']['lie']))
+                    output.extend("%.\n")
+                if( "persuade" in data[var]['social_modifiers'] ):
+                    output.extend("* Increases chance of persuading [[NPC]]s to do your bidding by ")
+                    output.extend(str(data[var]['social_modifiers']['persuade']))
+                    output.extend("%.\n")
+                if( "intimidate" in data[var]['social_modifiers'] ):
+                    output.extend("* Increases chance of intimidating [[NPC]]s by ")
+                    output.extend(str(data[var]['social_modifiers']['intimidate']))
+                    output.extend("%.\n")
+
         output.append("<!-- *YOUR PERSONAL NOTES AND HINTS GO BELOW HERE* -->\n")
         
         output.append("\n")
