@@ -8,7 +8,7 @@ root.withdraw()
 
 #Data is copied to clipboard, used for the Monsters
 
-list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/military.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
+list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/obsolete.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 data = list()
 
 ID_monster = dict()
@@ -24,9 +24,7 @@ def check_duplicates(x,y): #check if there are duplicate ID's which might mess t
             for iterator2 in range(0, len(y)):
                 if ('id' in y[iterator2]): #abstract check.
                     if (id == y[iterator2]["id"]):
-                        print "duplicate ID detected "
-                        print id
-                        print ".\n"
+                        print "duplicate ID detected " + str(id)
 
 def setAbstractIds(data): #some items have no ID value set, which this code depends on, but they do have an abstract. This function copies the abstract value into the id value.
     for it in range(0, len(data)):
@@ -34,13 +32,11 @@ def setAbstractIds(data): #some items have no ID value set, which this code depe
             if('abstract' in data[it]):
                 data[it]['id'] = data[it]['abstract']
             else:
-                print 'both no id and no abstract detected '
-                print it
-                print '.\n'
+                print 'both no id and no abstract detected ' str(it)
     return data
 
 def ID_To_String(id):
-    return ID_monster[id]["name"]
+    return getValue(ID_monster[id]["id_nr"],'name')
 
 def ID_To_Mon_Int(id):
     if(id in ID_monster):
@@ -73,7 +69,6 @@ def fill_ID_List (data):
     for iterator in range(0, len(data)):
         keyD = dict()
         keyD['id_nr'] = iterator
-        keyD["name"] = data[iterator]["name"]
         retval[data[iterator]["id"]] = keyD
     return retval
 

@@ -65,10 +65,11 @@ This script generates the individual pages for the traits/mutations. Works via c
 
 ## Automated scripts
 The following scripts simply use pywikibot to upload content to the pages automatically.
-navbar_trait.py -> Template:Navbar/traits
 bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
-comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Mutagen
+comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
 mutationtable.py -> Template:Mutationtable
+navbar_trait.py -> Template:Navbar/traits
+navbox_enemies.py -> Template:Navbox/enemies
 foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
 techniques.py -> Template:TECtoname page.
 speciestoname.py -> Template:Speciestoname

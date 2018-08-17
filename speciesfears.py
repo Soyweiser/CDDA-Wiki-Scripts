@@ -41,6 +41,6 @@ text = "".join(output)
 text.replace("\n", "\\n")
 site = pywikibot.Site('en', 'cddawiki')
 page = pywikibot.Page(site, 'Template:Speciesfears')
-page.text = Foodtext
+page.text = text
 page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts speciesfears.py script')
 exit()
