@@ -69,7 +69,7 @@ bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
 mutationtable.py -> Template:Mutationtable
 navbar_trait.py -> Template:Navbar/traits
-navbox_enemies.py -> Template:Navbox/enemies
+navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
 foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
 techniques.py -> Template:TECtoname page.
 speciestoname.py -> Template:Speciestoname
