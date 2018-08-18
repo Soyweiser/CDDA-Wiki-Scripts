@@ -242,6 +242,11 @@ while True:
                     if('baby_timer' in reproduction):
                         output.append("\n|reproductionTimer=")
                         output.append(str(reproduction['baby_timer']))
+                if(checkValue(id, 'burn_into')): #Monsters can be burned into other monsters
+                    output.append("\n|BurnID=")
+                    output.append(getValue(id,'burn_into'))
+                    output.append("\n|BurnName=")
+                    output.append(ID_To_String(getValue(id,'burn_into')))
                 if(checkValue(id, 'description')):
                     output.append("\n|description="+getValue(id, 'description'))
 
