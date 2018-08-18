@@ -8,7 +8,7 @@ root.withdraw()
 
 #Data is copied to clipboard, used for the Monsters
 
-list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/obsolete.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
+list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 data = list()
 
 ID_monster = dict()
@@ -32,7 +32,7 @@ def setAbstractIds(data): #some items have no ID value set, which this code depe
             if('abstract' in data[it]):
                 data[it]['id'] = data[it]['abstract']
             else:
-                print 'both no id and no abstract detected ' str(it)
+                print 'both no id and no abstract detected ' + str(it)
     return data
 
 def ID_To_String(id):
