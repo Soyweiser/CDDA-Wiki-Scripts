@@ -9,6 +9,9 @@ root.withdraw()
 #Data is copied to clipboard, used for the Monsters
 
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
+
+list_monster_egg_files = [ 'data/json/items/comestibles/egg.json' ]
+
 data = list()
 
 ID_monster = dict()
@@ -72,6 +75,23 @@ def fill_ID_List (data):
         retval[data[iterator]["id"]] = keyD
     return retval
 
+## Egg items
+for it in range(0, len(list_monster_egg_files)):
+    with open(list_monster_egg_files[it]) as data_file:
+        new_data = json.load(data_file)
+        check_duplicates (data, new_data)
+        data = merge_json_data(data, new_data)
+eggData = setAbstractIds(data)
+
+def getEggName(id):
+    for it in range(0, len(eggData)):
+        if(eggData[it]['id'] == id):
+            if('name'in eggData[it]):
+                return eggData[it]['name']
+            else:
+                return "Egg doesn't have name set"
+
+## Species
 with open('data/json/species.json') as data_file:
     species = json.load(data_file)
 
@@ -204,6 +224,24 @@ while True:
                         if (it > 0):
                             output.append(", ")
                         output.append(death[it])
+                if(checkValue(id, 'reproduction')): #Add reproduction data.
+                    reproduction = getValue(id, 'reproduction')
+                    if('baby_monster' in reproduction):
+                        output.append("\n|reproductionID=")
+                        output.append(reproduction['baby_monster'])
+                        output.append("\n|reproductionName=")
+                        output.append(ID_To_String(reproduction['baby_monster']))
+                    if('baby_egg' in reproduction):
+                        output.append("\n|reproductionEggID=")
+                        output.append(reproduction['baby_egg'])
+                        output.append("\n|reproductionEggName=")
+                        output.append(getEggName(reproduction['baby_egg']))
+                    if('baby_count' in reproduction):
+                        output.append("\n|reproductionCount=")
+                        output.append(str(reproduction['baby_count']))
+                    if('baby_timer' in reproduction):
+                        output.append("\n|reproductionTimer=")
+                        output.append(str(reproduction['baby_timer']))
                 if(checkValue(id, 'description')):
                     output.append("\n|description="+getValue(id, 'description'))
 
