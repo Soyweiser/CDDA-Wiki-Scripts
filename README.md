@@ -38,17 +38,9 @@ In the [location of pywikibotinstall] run 'python .\pwb.py generate_user_files' 
 Data is copied to clipboard, used for the Bionics, doesn't work on bionics that are not defined in 'data\json\bionics.json'
 Microreactor upgrade CBM will need to be fixed manually.
 
-## materialresistances.py
-
-Data is copied to clipboard, used for the Template:Matbashres, Matfireres, Matcutres, Matelecres, Matacidres, takes a command line argument, must be the json data field you are interested in. for example 'acid_resist'
-
 ## materials.py
 
 Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Materials page
-
-## materialtoname.py
-
-Data is copied to clipboard, used for the Template:Materialtoname
 
 ## monsters.py
 
@@ -67,6 +59,8 @@ This script generates the individual pages for the traits/mutations. Works via c
 The following scripts simply use pywikibot to upload content to the pages automatically.
 bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
+materialtoname.py -> Template:Materialtoname
+materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
 mutationtable.py -> Template:Mutationtable
 navbar_trait.py -> Template:Navbar/traits
 navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
