@@ -35,6 +35,13 @@ for it in range(0, len(data)):
     if('soft' in  data[it]):
         if(data[it]['soft'] == True):
             output.append("|soft=Y")
+    if('burn_products' in  data[it]):
+        if (len(data[it]['burn_products']) > 0):
+            output.append("|burn_products=")
+            for ite in range (0, len(data[it]['burn_products'])):
+                if(ite > 0):
+                    output.append(", ")
+                output.append(data[it]['burn_products'][ite][0])
     output.append("}}\n\n")
 
 text = "".join(output)
