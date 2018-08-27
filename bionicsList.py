@@ -14,19 +14,38 @@ with open('data/json/bionics.json') as data_file:
 with open('data/json/items/bionics.json') as data_file:
     data1 = json.load(data_file)
 
+with open('data/json/items/obsolete.json') as data_file:
+    obsolete = json.load(data_file)
+
+def isObsoleteID(id):
+    for it in range(0, len(obsolete)):
+        if('id' in obsolete[it]):
+            if( id == obsolete[it]['id']):
+                return True
+    return False
+
 ID_bionic = list()
 ID_bionic_faulty = list()
 for iterator in range(0, len(data)):
-    if('flags' in data[iterator]):
-        if('BIONIC_FAULTY' in data[iterator]['flags']): #only add bionics that are not faulty to this list.
-            ID_bionic_faulty.append(data[iterator]["name"])
+    ignore = False
+    if('id' in data[iterator]):
+        if(isObsoleteID(data[iterator]['id'])):
+            ignore = True
+    if(not ignore):
+        if('flags' in data[iterator]):
+            if('BIONIC_FAULTY' in data[iterator]['flags']): #only add bionics that are not faulty to this list.
+                ID_bionic_faulty.append(data[iterator]["name"])
+            else:
+                ID_bionic.append(data[iterator]["name"])
         else:
             ID_bionic.append(data[iterator]["name"])
-    else:
-        ID_bionic.append(data[iterator]["name"])
 
 for iterator in range(0, len(data1)): #the previous loop does not add some cbms, this loop will add the missing ones.
-    if(not 'abstract' in data1[iterator]): #don't add abstract bionics.
+    ignore = False
+    if('id' in data1[iterator]):
+        if(isObsoleteID(data1[iterator]['id'])):
+            ignore = true
+    if(not 'abstract' in data1[iterator] and not ignore): #don't add abstract bionics.
         excluded = True
         for iter in range(0, len(data)):
             if(data[iter]['id'] == data1[iterator]['id']):
