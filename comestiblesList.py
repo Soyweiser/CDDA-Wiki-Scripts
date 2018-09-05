@@ -10,7 +10,7 @@ from version import version
 #Usage: python [location of pywikibotinstall]\pwb.py comestiblesList.py
 #   Then input your password, and wait for the page to be updated.
 
-list_comestibles_files = [ 'data/json/items/comestibles.json', 'data/json/items/comestibles/brewing.json', 'data/json/items/comestibles/carnivore.json', 'data/json/items/comestibles/drink.json', 'data/json/items/comestibles/egg.json', 'data/json/items/comestibles/med.json', 'data/json/items/comestibles/mutagen.json', 'data/json/items/comestibles/protein.json', 'data/json/items/comestibles/seed.json', 'data/json/items/comestibles/spice.json', 'data/json/items/classes/comestible.json', 'data/core/basic.json' ]
+list_comestibles_files = [ 'data/json/items/comestibles.json', 'data/json/items/comestibles/brewing.json', 'data/json/items/comestibles/carnivore.json', 'data/json/items/comestibles/drink.json', 'data/json/items/comestibles/egg.json', 'data/json/items/comestibles/frozen.json', 'data/json/items/comestibles/med.json', 'data/json/items/comestibles/mutagen.json', 'data/json/items/comestibles/protein.json', 'data/json/items/comestibles/seed.json', 'data/json/items/comestibles/spice.json', 'data/json/items/classes/comestible.json', 'data/core/basic.json' ]
 data = list()
 
 def merge_json_data(x,y): #expects two lists
