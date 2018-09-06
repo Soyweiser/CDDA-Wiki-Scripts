@@ -10,9 +10,9 @@ from version import version
 with open('data/json/mutations.json') as data_file:
     data = json.load(data_file)
 
-list_categories = [ 'Lizard', 'Bird', 'Fish', 'Beast', 'Feline', 'Lupine', 'Ursine', 'Cattle', 'Insect', 'Plant', 'Slime (Mutation category)|Slime', 'Troglobite_(Mutation_category)|Troglobite', 'Cephalopod', 'Spider', 'Rat', 'Medical', 'Alpha', 'Elf-A', 'Chimera', 'Raptor', 'Mycus', 'Marloss' ]
+list_categories = [ 'Lizard', 'Bird', 'Fish', 'Beast', 'Feline', 'Lupine', 'Ursine', 'Cattle', 'Insect', 'Plant', 'Slime (Mutation category)|Slime', 'Troglobite_(Mutation_category)|Troglobite', 'Cephalopod', 'Spider', 'Rat', 'Medical', 'Alpha', 'Elf-A', 'Chimera', 'Raptor', 'Mouse', 'Mycus', 'Marloss' ]
 
-dict_categories = { 'LIZARD' : 'Lizard', 'BIRD' : 'Bird', 'FISH' : 'Fish', 'BEAST' : 'Beast', 'FELINE' : 'Feline', 'LUPINE' : 'Lupine', 'URSINE' : 'Ursine', 'CATTLE' : 'Cattle', 'INSECT' : 'Insect', 'PLANT' : 'Plant', 'SLIME' : 'Slime (Mutation category)|Slime', 'TROGLOBITE' : 'Troglobite_(Mutation_category)|Troglobite', 'CEPHALOPOD' : 'Cephalopod', 'SPIDER' : 'Spider', 'RAT' : 'Rat', 'MEDICAL' : 'Medical', 'ALPHA' : 'Alpha', 'ELFA' : 'Elf-A', 'CHIMERA' : 'Chimera', 'RAPTOR' : 'Raptor', 'MYCUS' : 'Mycus', 'MARLOSS' : 'Marloss' }
+dict_categories = { 'LIZARD' : 'Lizard', 'BIRD' : 'Bird', 'FISH' : 'Fish', 'BEAST' : 'Beast', 'FELINE' : 'Feline', 'LUPINE' : 'Lupine', 'URSINE' : 'Ursine', 'CATTLE' : 'Cattle', 'INSECT' : 'Insect', 'PLANT' : 'Plant', 'SLIME' : 'Slime (Mutation category)|Slime', 'TROGLOBITE' : 'Troglobite_(Mutation_category)|Troglobite', 'CEPHALOPOD' : 'Cephalopod', 'SPIDER' : 'Spider', 'RAT' : 'Rat', 'MEDICAL' : 'Medical', 'ALPHA' : 'Alpha', 'ELFA' : 'Elf-A', 'CHIMERA' : 'Chimera', 'RAPTOR' : 'Raptor', 'MOUSE' : 'Mouse', 'MYCUS' : 'Mycus', 'MARLOSS' : 'Marloss' }
 
 dict_styles = { 'Lizard' : "background:khaki; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
  'Bird' : "groupstyle = background:DeepSkyBlue; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
@@ -33,12 +33,13 @@ dict_styles = { 'Lizard' : "background:khaki; color:Black; padding-left:1em; pad
  'Alpha' : "background:SkyBlue; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
  'Elf-A' : "background:lightgreen; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
  'Chimera' : "background:IndianRed; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
- 'Raptor' : "background:green; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;"
+ 'Raptor' : "background:green; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;",
+ 'Mouse' : "background:lightgrey; color:Black; padding-left:1em; padding-right:1em; text-align:right; font-weight: bold; white-space:nowrap;"
  }
     
 output = [ """{{Navbox
-|name       = Mutations
-|title      = [[Mutations]]
+|name       = Mutationtable
+|title      = [[Mutation|Mutations]]
 |state      = uncollapsed
 
 |bodystyle = background:white; width:100%; vertical-align:middle; border-color: #CCAAAA;

@@ -270,6 +270,8 @@ while True:
                 output.append('|raptor=1')
             if( "RAT" in data[var]["category"] ):
                 output.append('|rat=1')
+            if( "MOUSE" in data[var]["category"] ):
+                output.append('|mouse=1')
             if( "MYCUS" in data[var]["category"] ):
                 output.append('|mycus=1')
             if( "MARLOSS" in data[var]["category"] ):
