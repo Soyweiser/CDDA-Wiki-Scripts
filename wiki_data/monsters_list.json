@@ -181,8 +181,8 @@
   {  "id": "mon_fish_whitefish", "cat": 2 },
   {  "id": "mon_fish_pickerel", "cat": 2 },
   {  "id": "mon_zhark", "cat": 7 },
-  {  "id": "mon_mutant_carp", "cat": 4 },
-  {  "id": "mon_mutant_salmon", "cat": 4 },
+  {  "id": "mon_mutant_carp", "cat": 3 },
+  {  "id": "mon_mutant_salmon", "cat": 3 },
   {  "id": "mon_fish_lobster", "cat": 2 },
   {  "id": "mon_fish_crayfish", "cat": 2 },
   {  "id": "mon_sewer_fish", "cat": 11 },
@@ -312,5 +312,7 @@
   {  "id": "mon_gator", "cat": 11 },
   {  "id": "mon_rattlesnake", "cat": 1 },
   {  "id": "mon_rattlesnake_giant", "cat": 1 },
-  {  "id": "mon_sewer_snake", "cat": 11 }
+  {  "id": "mon_sewer_snake", "cat": 11 },
+  {  "id": "mon_zombie_nullfield", "cat": 6 },
+  {  "id": "mon_zombie_military_pilot", "cat": 6 }
 ]

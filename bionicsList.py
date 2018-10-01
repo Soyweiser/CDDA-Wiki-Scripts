@@ -7,6 +7,7 @@ from version import version
 #Data is automatically copied to the wiki template pages.
 #Usage: python [location of pywikibotinstall]\pwb.py bionicsList.py
 #   Then input your password, and wait for the pages to be updated.
+#Hint: after running this, manually check if there are any additions/removals needed from Template:CBMbar
 
 with open('data/json/bionics.json') as data_file:
     data = json.load(data_file)
