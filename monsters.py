@@ -260,9 +260,21 @@ while True:
                     output.append(getValue(id,'burn_into'))
                     output.append("\n|BurnName=")
                     output.append(ID_To_String(getValue(id,'burn_into')))
+                if(checkValue(id, 'upgrades')): #Monsters evolution
+                    if('into' in getValue(id,'upgrades')):
+                        output.append("\n|upgrade=")
+                        output.append(ID_To_String(getValue(id,'upgrades')['into']))
+                    elif('into_group' in getValue(id,'upgrades')):
+                        output.append("\n|upgrade_group=")
+                        output.append(getValue(id,'upgrades')['into_group'])
+                    if('half_life' in getValue(id,'upgrades')):
+                        output.append("\n|upgrade_half_life=")
+                        output.append(str(getValue(id,'upgrades')['half_life']))
+                    elif('age_grow' in getValue(id,'upgrades')):
+                        output.append("\n|upgrade_time=")
+                        output.append(str(getValue(id,'upgrades')['age_grow']))
                 if(checkValue(id, 'description')):
                     output.append("\n|description="+getValue(id, 'description'))
-
         output.append("""\n}}<noinclude>
 <div style="margin: 1em; border: 1px solid #aaa; background-color: #white; padding: 5px;">
 <h2><span class="plainlinks" style="float: right; font-size: small">
