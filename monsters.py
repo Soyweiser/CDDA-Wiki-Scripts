@@ -264,6 +264,9 @@ while True:
                         if (it > 0):
                             output.append(", ")
                         output.append(death[it])
+                if(checkValue(id, 'harvest')): #Harvest data is the name of a special sort of droplist see: data/json/harvest.json. Use harvest.py (which doesn't exist yet) to populate these wiki pages.
+                    output.append("\n|harvest=")
+                    output.append(getValue(id,'harvest'))
                 if(checkValue(id, 'reproduction')): #Add reproduction data.
                     reproduction = getValue(id, 'reproduction')
                     if('baby_monster' in reproduction):
@@ -282,6 +285,13 @@ while True:
                     if('baby_timer' in reproduction):
                         output.append("\n|reproductionTimer=")
                         output.append(str(reproduction['baby_timer']))
+                if(checkValue(id, 'baby_flags')):
+                    babyf = getValue(id, 'baby_flags')
+                    output.append("\n|baby_flag=")
+                    for it in range(0, len(babyf)):
+                        if (it >0):
+                            output.append(", ")
+                        output.append(str(babyf[it]).lower())
                 if(checkValue(id, 'biosignature')): #Add poop data.
                     waste = getValue(id, 'biosignature')
                     if('biosig_item' in waste):
