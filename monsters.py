@@ -10,7 +10,7 @@ root.withdraw()
 
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 
-list_monster_egg_files = [ 'data/json/items/comestibles/egg.json' ]
+list_item_files = [ 'data/json/items/biosignatures.json', 'data/json/items/comestibles/egg.json' ]
 
 data = list()
 
@@ -75,21 +75,22 @@ def fill_ID_List (data):
         retval[data[iterator]["id"]] = keyD
     return retval
 
-## Egg items
-for it in range(0, len(list_monster_egg_files)):
-    with open(list_monster_egg_files[it]) as data_file:
+## Normal items
+for it in range(0, len(list_item_files)):
+    with open(list_item_files[it]) as data_file:
         new_data = json.load(data_file)
         check_duplicates (data, new_data)
         data = merge_json_data(data, new_data)
-eggData = setAbstractIds(data)
+itemData = setAbstractIds(data)
+data = list()
 
-def getEggName(id):
-    for it in range(0, len(eggData)):
-        if(eggData[it]['id'] == id):
-            if('name'in eggData[it]):
-                return eggData[it]['name']
+def getItemName(id):
+    for it in range(0, len(itemData)):
+        if(itemData[it]['id'] == id):
+            if('name'in itemData[it]):
+                return itemData[it]['name']
             else:
-                return "Egg doesn't have name set"
+                return "Item " + itemData[it]['id'] + "doesn't have name set"
 
 ## Species
 with open('data/json/species.json') as data_file:
@@ -219,6 +220,43 @@ while True:
                     output.append("\n|morale="+str(getValue(id, 'morale')))
                 if(checkValue(id, 'default_faction')):
                     output.append("\n|default_faction="+getValue(id, 'default_faction'))
+                if(checkValue(id, 'path_settings')): #most of these path settings values are not used yet ingame by any monsters. Added for completion.
+                    path = getValue(id, 'path_settings')
+                    output.append("\n<!--path settings-->")
+                    if('max_dist' in path):
+                        output.append("\n|max_dist=")
+                        output.append(str(path['max_dist']))
+                    if('max_length' in path):
+                        output.append("\n|max_length=")
+                        output.append(str(path['max_length']))
+                    if('bash_strength' in path):
+                        output.append("\n|bash_strength=")
+                        output.append(str(path['bash_strength']))
+                    if('allow_open_doors' in path):
+                        output.append("\n|allow_open_doors=")
+                        output.append(str(path['allow_open_doors']))
+                    if('avoid_traps' in path):
+                        output.append("\n|avoid_traps=")
+                        output.append(str(path['avoid_traps']))
+                    if('allow_climb_stairs' in path):
+                        output.append("\n|allow_climb_stairs=")
+                        output.append(str(path['allow_climb_stairs']))
+                    output.append("\n<!--end of path settings-->")
+                if(checkValue(id, 'anger_triggers')):
+                    triggers = getValue(id, 'anger_triggers')
+                    for it in range(0, len(triggers)):
+                        output.append("\n|anger"+str(it+1)+"=")
+                        output.append(triggers[it])
+                if(checkValue(id, 'fear_triggers')):
+                    triggers = getValue(id, 'fear_triggers')
+                    for it in range(0, len(triggers)):
+                        output.append("\n|fear"+str(it+1)+"=")
+                        output.append(triggers[it])
+                if(checkValue(id, 'placate_triggers')):
+                    triggers = getValue(id, 'placate_triggers')
+                    for it in range(0, len(triggers)):
+                        output.append("\n|placate"+str(it+1)+"=")
+                        output.append(triggers[it])
                 if(checkValue(id, 'death_function')):
                     death = getValue(id, 'death_function')
                     output.append("\n|ondeath=")
@@ -237,13 +275,21 @@ while True:
                         output.append("\n|reproductionEggID=")
                         output.append(reproduction['baby_egg'])
                         output.append("\n|reproductionEggName=")
-                        output.append(getEggName(reproduction['baby_egg']))
+                        output.append(getItemName(reproduction['baby_egg']))
                     if('baby_count' in reproduction):
                         output.append("\n|reproductionCount=")
                         output.append(str(reproduction['baby_count']))
                     if('baby_timer' in reproduction):
                         output.append("\n|reproductionTimer=")
                         output.append(str(reproduction['baby_timer']))
+                if(checkValue(id, 'biosignature')): #Add poop data.
+                    waste = getValue(id, 'biosignature')
+                    if('biosig_item' in waste):
+                        output.append("\n|biosig_item=")
+                        output.append(getItemName(waste['biosig_item']))
+                    if('biosig_timer' in waste):
+                        output.append("\n|biosig_timer=")
+                        output.append(str(waste['biosig_timer']))
                 if(checkValue(id, 'vision_day')):
                     output.append("\n|vision_day=")
                     output.append(str(getValue(id,'vision_day')))
