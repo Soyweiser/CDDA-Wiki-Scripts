@@ -12,6 +12,11 @@ list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json'
 
 list_item_files = [ 'data/json/items/biosignatures.json', 'data/json/items/comestibles/egg.json' ]
 
+#Copied from navbox_enemies.py, used to add additional categories to monster pages.
+monster_group_list = [ 'Domesticated Animals', 'Forest Animals', 'River animals', 'Wild Mutants', 'Insectoids', 'Giant worms', 'Zombies', 'Zombie Animals', 'Plants', 'Fungi', 'Blobs', 'Underground dwellers', 'Swamp creatures', 'Spiders', 'Unearthed horrors', 'Netherworld inhabitants', 'Cult', 'Robots', 'Hallucinations', 'Joke Monsters', 'Other', 'ignored' ]
+
+monster_cat_list_file = "wiki_data/monsters_list.json"
+
 data = list()
 
 ID_monster = dict()
@@ -102,10 +107,19 @@ def species_tostring (id):
             return species[it]['name']
     return "species not found"
 
-def species_categories (species_list): #species_list is a list of species, prints a list of categories
+def species_categories (species_list, id): #species_list is a list of species, prints a list of categories
     retval = ""
+    species_list_strings = []
     for it in range(0, len(species_list)):
-        retval += "[[Category:"+species_tostring(species_list[it])+"]]\n"
+        species_list_strings.append(species_tostring(species_list[it]))
+    #now use the 'wiki_data\monster_list.json' file to set any additional categories.
+    for ite in range(0, len(monster_cat_list)):
+        if(monster_cat_list[ite]['id'] == id):
+#            print monster_group_list[monster_cat_list[ite]['cat']]
+            if(not monster_group_list[monster_cat_list[ite]['cat']].lower() in species_list_strings):
+                species_list_strings.append(monster_group_list[monster_cat_list[ite]['cat']])
+    for it in range(0, len(species_list_strings)):
+        retval += "[[Category:"+species_list_strings[it]+"]]\n"
     return retval
 
 output = []
@@ -121,6 +135,18 @@ ID_monster = fill_ID_List(data)
 Species_to_text = dict()
 for iterator in range(0, len(species)):
     Species_to_text[species[iterator]["id"]] = species[iterator]["name"]
+
+#monster_list.json (copied from navbox_enemies.py)
+with open(monster_cat_list_file) as data_file:
+    monster_cat_list = json.load(data_file)
+#now check if there are missing monster id's
+for ite in range(0, len(data)):
+    exists = False
+    for it in range(0, len(monster_cat_list)):
+        if(monster_cat_list[it]['id'] == data[ite]['id']):
+            exists = True
+    if(not exists):
+        print "monster ID " + data[ite]['id'] + " missing from monster_list.json"
 
 var = raw_input(">")
 while True:
@@ -344,8 +370,7 @@ while True:
 <span class="plainlinks" style="font-size: small"><center>( [{{fullurl:{{lc:{{PAGENAME}}}}/doc|action=edit}} <span title="Edit user notes">Edit Notes</span>] )</center></span>
 </div>
 {{Enemies}}
-"""+species_categories(getValue(id, 'species'))+version+"""</noinclude>""")
-
+"""+species_categories(getValue(id, 'species'), getValue(id, 'id'))+version + "</noinclude>")
         text = "".join(output)
         text.replace("\n", "\\n")
         print text

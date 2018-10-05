@@ -111,7 +111,7 @@ for ite in range(0, len(data)):
         if(monster_cat_list[it]['id'] == data[ite]['id']):
             exists = True
     if(not exists):
-        print "missing monster ID " + data[ite]['id']
+        print "monster ID " + data[ite]['id'] + " missing from monster_list.json"
 
 output = []
 output.append("""{{Navbox
