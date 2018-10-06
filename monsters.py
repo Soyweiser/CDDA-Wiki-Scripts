@@ -115,7 +115,6 @@ def species_categories (species_list, id): #species_list is a list of species, p
     #now use the 'wiki_data\monster_list.json' file to set any additional categories.
     for ite in range(0, len(monster_cat_list)):
         if(monster_cat_list[ite]['id'] == id):
-#            print monster_group_list[monster_cat_list[ite]['cat']]
             if(not monster_group_list[monster_cat_list[ite]['cat']].lower() in species_list_strings):
                 species_list_strings.append(monster_group_list[monster_cat_list[ite]['cat']])
     for it in range(0, len(species_list_strings)):
