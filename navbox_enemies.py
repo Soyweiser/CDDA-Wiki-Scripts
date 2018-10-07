@@ -1,6 +1,7 @@
 import json
 import sys
 from version import version
+from name_hacks import monster_name
 import pywikibot
 
 #documentation
@@ -14,10 +15,6 @@ import pywikibot
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 
 monster_group_list = [ 'Domesticated Animals', 'Forest Animals', 'River animals', 'Wild Mutants', 'Insectoids', 'Giant worms', 'Zombies', 'Zombie Animals', 'Plants', 'Fungi', 'Blobs', 'Underground dwellers', 'Swamp creatures', 'Spiders', 'Unearthed horrors', 'Netherworld inhabitants', 'Cult', 'Robots', 'Hallucinations', 'Joke Monsters', 'Other', 'ignored' ]
-
-#the following dict is made for monster id's and specific wiki page names. For example the 'mon_dog_thing' has as a page name 'Dog (nether)', but the links are called 'dog' for spoilers sake. The second hacks is for the Template:Enemiestable pages.
-monster_name_hacks = { 'mon_dog_thing' : 'Dog (nether)|Dog', 'mon_triffid_heart' : 'Triffid heart (creature)|Triffid heart' }
-monster_name_hacks2 = { 'mon_dog_thing' : 'Dog (nether)', 'mon_triffid_heart' : 'Triffid heart (creature)' }
 
 monster_cat_list_file = "wiki_data/monsters_list.json"
 
@@ -133,8 +130,8 @@ for it in range(0, len(monster_group_list)):
     monsters_list = []
     for ite in range(0, len(monster_cat_list)):
         if(monster_cat_list[ite]['cat'] == it):
-            if (monster_cat_list[ite]['id'] in monster_name_hacks and not monster_cat_list[ite]['id'] in monsters_list):
-                monsters_list.append(monster_name_hacks[monster_cat_list[ite]['id']])
+            if (monster_cat_list[ite]['id'] != monster_name(monster_cat_list[ite]['id']) and not monster_cat_list[ite]['id'] in monsters_list):
+                monsters_list.append(monster_name(monster_cat_list[ite]['id']))
             elif (not ID_To_String(monster_cat_list[ite]['id']) in monsters_list):
                 monsters_list.append(ID_To_String(monster_cat_list[ite]['id']))
     monsters_list = sorted(monsters_list)
@@ -175,8 +172,8 @@ for it in range(0, len(monster_group_list)):
     monsters_list = []
     for ite in range(0, len(monster_cat_list)):
         if(monster_cat_list[ite]['cat'] == it):
-            if (monster_cat_list[ite]['id'] in monster_name_hacks2 and not monster_cat_list[ite]['id'] in monsters_list):
-                monsters_list.append(monster_name_hacks2[monster_cat_list[ite]['id']])
+            if (monster_cat_list[ite]['id'] != monster_name(monster_cat_list[ite]['id']) and not monster_cat_list[ite]['id'] in monsters_list):
+                monsters_list.append(monster_name(monster_cat_list[ite]['id']))
             elif (not ID_To_String(monster_cat_list[ite]['id']) in monsters_list):
                 monsters_list.append(ID_To_String(monster_cat_list[ite]['id']))
     monsters_list = sorted(monsters_list)
