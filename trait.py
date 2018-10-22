@@ -207,7 +207,7 @@ while True:
                             output.append(']]<!--')
                             output.append(types_muts_dict[cancel_types][ite])
                             output.append('-->')
-                            if(it+1 < len(types_muts_dict[cancel_types])):
+                            if(ite+1 < len(types_muts_dict[cancel_types])):
                                 if( not types_muts_dict[cancel_types][ite+1] == data[var]["id"] ): #ignore the mutation we are creating
                                     output.append(", ")
                     if(it+1 < len(data[var]["types"])):
@@ -320,8 +320,8 @@ while True:
                 output.append('|mycus=1')
             if( "MARLOSS" in data[var]["category"] ):
                 output.append('|marloss=1')
-            #footer
-            output.append("""
+        #footer
+        output.append("""
 }}<noinclude>
 <div style="margin: 1em; border: 1px solid #aaa; background-color: #white; padding: 5px;">
 <h2><span class="plainlinks" style="float: right; font-size: small">
