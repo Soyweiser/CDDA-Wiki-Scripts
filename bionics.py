@@ -27,8 +27,11 @@ for iterator in range(0, len(mutation_data)):
     keyD["name"] = mutation_data[iterator]["name"]
     ID_mut[mutation_data[iterator]["id"]] = keyD
 
-def MUT_ID_To_String(id):
-    return ID_mut[id]["name"]
+def MUT_ID_To_String(id): #TODO: fix this wikipagename hack with a more generalized one.
+    if (ID_mut[id]["name"] == "Infrared Vision"):
+        return "Infrared Vision (Mutation)|Infrared Vision"
+    else:
+        return ID_mut[id]["name"]
 
 def isObsoleteID(id):
     for it in range(0, len(obsolete)):
