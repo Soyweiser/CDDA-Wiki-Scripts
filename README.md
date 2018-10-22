@@ -6,15 +6,20 @@ CDDA main repository: https://github.com/CleverRaven/Cataclysm-DDA
 CDDA Wiki: http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Main_Page
 
 Uses python 2.7
+
 Some scripts do not directly add content to the wiki. Only converts the json files. Need to be manually copy pasted in.
+
 Other scripts use pywikibot ( https://www.mediawiki.org/wiki/Manual:Pywikibot ) to automatically upload information to the wiki.
 
 # Install
 Get python 2.7
+
 Copy the most recent json files into data/json
 
 Get Microsoft Visual C++ Compiler for Python 2.7 (note to self, why? Sorry this documentation is a bit incomplete, also install Pywikibot )
+
 Windows:
+
 Download and install https://www.microsoft.com/en-in/download/details.aspx?id=44266
 ```
 pip install --upgrade setuptools
@@ -31,7 +36,8 @@ pip.exe install -U requests[security]
 
 Configure pywikibot:
 Copy the pywikibot_config\cddawiki_family.py to [location of pywikibotinstall]\pywikibot\families
-In the [location of pywikibotinstall] run 'python .\pwb.py generate_user_files' setup your userfiles, and the account used by the bot to connect to the wiki.
+
+In the [location of pywikibotinstall] run `python .\pwb.py generate_user_files` setup your userfiles, and the account used by the bot to connect to the wiki.
 
 # Documentation of scripts
 
