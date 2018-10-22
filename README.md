@@ -6,26 +6,28 @@ CDDA main repository: https://github.com/CleverRaven/Cataclysm-DDA
 CDDA Wiki: http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Main_Page
 
 Uses python 2.7
-Does not directly add content to the wiki. Only converts the json files. Need to be manually copy pasted in.
+Some scripts do not directly add content to the wiki. Only converts the json files. Need to be manually copy pasted in.
+Other scripts use pywikibot ( https://www.mediawiki.org/wiki/Manual:Pywikibot ) to automatically upload information to the wiki.
 
 # Install
 Get python 2.7
 Copy the most recent json files into data/json
 
-Get 
+Get Microsoft Visual C++ Compiler for Python 2.7 (note to self, why? Sorry this documentation is a bit incomplete, also install Pywikibot )
 Windows:
 Download and install https://www.microsoft.com/en-in/download/details.aspx?id=44266
+```
 pip install --upgrade setuptools
 pip install ez_setup
-
 pip install requests
+```
 If it's still not working, maybe pip didn't install/upgrade setup_tools properly so you might want to try
+```
 easy_install -U setuptools
 pip install --upgrade setuptools
-
 pip install requests (again)
-
 pip.exe install -U requests[security] 
+```
 
 Configure pywikibot:
 Copy the pywikibot_config\cddawiki_family.py to [location of pywikibotinstall]\pywikibot\families
@@ -57,20 +59,20 @@ This script generates the individual pages for the traits/mutations. Works via c
 
 ## Automated scripts
 The following scripts simply use pywikibot to upload content to the pages automatically.
-bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
-comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
-materialtoname.py -> Template:Materialtoname
-materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
-mutationtable.py -> Template:Mutationtable
-navbar_trait.py -> Template:Navbar/traits
-navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
-foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
-techniques.py -> Template:TECtoname page.
-speciestoname.py -> Template:Speciestoname
-speciesangers.py -> Template:Speciesangers
-speciesfears.py -> Template:Speciesfears
+- bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
+- comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
+- materialtoname.py -> Template:Materialtoname
+- materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
+- mutationtable.py -> Template:Mutationtable
+- navbar_trait.py -> Template:Navbar/traits
+- navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
+- foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
+- techniques.py -> Template:TECtoname page.
+- speciestoname.py -> Template:Speciestoname
+- speciesangers.py -> Template:Speciesangers
+- speciesfears.py -> Template:Speciesfears
 
-#Troubleshooting
+# Troubleshooting
 
 ## Pywikibot can't connect to the site. Error mentions that 'http' is not a valid protocol return value.
 
