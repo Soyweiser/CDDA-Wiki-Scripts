@@ -15,15 +15,41 @@ root.withdraw()
 with open('data/json/mutations.json') as data_file:
     data = json.load(data_file)
 
+with open('data/json/mutation_type.json') as data_file: #not needed for wiki editing, but added as a sort of typo check for the json data.
+    type_data = json.load(data_file)
+
+types_muts_names = list() #lists of names of the types.
+types_muts_dict = dict() #dictionary of types with a list of mutation ID's
+for it in range(0, len(type_data)):
+    if("type" in type_data[it]):
+        if(type_data[it]['type'] == "mutation_type"):
+            types_muts_names.append(type_data[it]['id'])
+            types_muts_dict[types_muts_names[it]] = list()
+
 ID_mut = dict()
-for iterator in range(0, len(data)):
+for iterator in range(0, len(data)): #fill the ID_mut dictionary with 'id' data, and fill the types lists.
     keyD = dict()
     keyD['id_nr'] = iterator
     keyD["name"] = data[iterator]["name"]
     ID_mut[data[iterator]["id"]] = keyD
-    
-def ID_To_String(id):
-    return ID_mut[id]["name"]
+    if("types" in data[iterator]): #fill the types_muts_dict
+        for it in range(0, len(data[iterator]["types"])):
+            if (data[iterator]["types"][it] in types_muts_names):
+                types_muts_dict[data[iterator]["types"][it]].append(data[iterator]["id"])
+            else:
+                print "Mutation type not found " + str(data[iterator]["types"][it])
+
+#Prints the mutation types, used for bugfixing.
+#for it in range(0, len(types_muts_names)):
+#    print types_muts_names[it]
+#    for ite in range(0, len(types_muts_dict[types_muts_names[it]])):
+#        print " " + types_muts_dict[types_muts_names[it]][ite]
+
+def ID_To_String(id): #TODO: fix this wikipagename hack with a more generalized one.
+    if (ID_mut[id]["name"] == "Infrared Vision"):
+        return "Infrared Vision (Mutation)|Infrared Vision"
+    else:
+        return ID_mut[id]["name"]
 
 def ID_To_int(id):
     if(id in ID_mut):
@@ -158,16 +184,34 @@ while True:
                     output.append(", ")
             output.append('|')
         
-        if("cancels" in data[var]):
+        if("cancels" in data[var] or "types" in data[var]): # check if there are cancels that should be listed, also includes the type system, which forces only one option.
             output.append("CANCELS=")
-            for it in range(0, len(data[var]["cancels"])):
-                output.append('[[')
-                output.append(ID_To_String(data[var]["cancels"][it]))
-                output.append(']]<!--')
-                output.append(data[var]["cancels"][it])
-                output.append('-->')
-                if(it+1 < len(data[var]["cancels"])):
+            if("cancels" in data[var]):
+                for it in range(0, len(data[var]["cancels"])):
+                    output.append('[[')
+                    output.append(ID_To_String(data[var]["cancels"][it]))
+                    output.append(']]<!--')
+                    output.append(data[var]["cancels"][it])
+                    output.append('-->')
+                    if(it+1 < len(data[var]["cancels"])):
+                        output.append(", ")
+            if("types" in data[var]):
+                if("cancels" in data[var] and "types" in data[var]):
                     output.append(", ")
+                for it in range(0, len(data[var]["types"])): # loop over the types mutations and add them.
+                    cancel_types = data[var]["types"][it]
+                    for ite in range(0, len(types_muts_dict[cancel_types])):
+                        if( not types_muts_dict[cancel_types][ite] == data[var]["id"] ): #ignore the mutation we are creating
+                            output.append('[[')
+                            output.append(ID_To_String(types_muts_dict[cancel_types][ite]))
+                            output.append(']]<!--')
+                            output.append(types_muts_dict[cancel_types][ite])
+                            output.append('-->')
+                            if(it+1 < len(types_muts_dict[cancel_types])):
+                                if( not types_muts_dict[cancel_types][ite+1] == data[var]["id"] ): #ignore the mutation we are creating
+                                    output.append(", ")
+                    if(it+1 < len(data[var]["types"])):
+                        output.append(", ")
             output.append('|')
             
         if("changes_to" in data[var]):
@@ -363,7 +407,7 @@ while True:
                         output.append(data[var]["armor"][it]["parts"])
                         output.append("}}")
                     output.append(" location")
-                    if (it2 > 0):
+                    if (it > 0):
                         output.append("s")
                     output.append(":")
                     for it2 in range(0, len(data[var]["armor"][it])):
@@ -533,7 +577,6 @@ while True:
                 for it in range(0, len(data[var]["attacks"])):
                     output.extend(Attack_To_String(data[var]["attacks"][it]))
             else:
-                print(type(data[var]["attacks"]))
                 output.extend(Attack_To_String(data[var]["attacks"]))
         #Convert social modifiers.
         if( "social_modifiers" in data[var] ):
