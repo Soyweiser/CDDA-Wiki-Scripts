@@ -4,7 +4,7 @@ from version import version
 from name_hacks import monster_name
 import pywikibot
 
-#documentation
+#Documentation
 #data is uploaded automatically, used for the Template:Navbox/enemies page, and the various Template:Enemiestable lists.
 #Uses wiki_data/monsters_list.json, the script will mention missing monsterids from the list. (the json is a list of 'id's and 'cat's matched.
 #Usage: python [location of pywikibotinstall]\pwb.py navbox_enemies.py

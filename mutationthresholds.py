@@ -1,12 +1,10 @@
 import json
 import sys
-from pprint import pprint
-from Tkinter import Tk
-root = Tk()
-root.withdraw()
+import pywikibot
+from version import version
 
-#Data is copied to clipboard, Used to create the various lists for the threshold pages.
-#After executing, select the window running python again. And input a number. This creates a list of mutations copied into the clipboard. Copy and paste into the wiki. For the mapping between the input number and the page created look at the list_categories list. Start counting at zero.
+#Documentation
+#Data is uploaded automatically, on various used for the Template:Mutationthresholds/[mutation category name] pages, which are then included by the various mutation category pages.
 
 with open('data/json/mutations.json') as data_file:    
     data = json.load(data_file)
@@ -40,39 +38,41 @@ for iterator in range(0, len(data)):
             for it in data[iterator]['category']:
                 mut_trait[dict_categories[it]]['mutations'].append(data[iterator]['name'])
     
-output = []
-var = raw_input(">")
-while True:
-    while var.isdigit():
-        output = [ "<!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts -->\n= Traits = \n"]
-        for it in range(0, len(mut_trait[list_categories[int(var)]]['traits'])):
-            output.append("{{:")
-            output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['traits'][it]))
-            output.append("}}\n")
-        
-        output.append("\n= Normal Mutations =\n")
-        for it in range(0, len(mut_trait[list_categories[int(var)]]['mutations'])):
-            output.append("{{:")
-            output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['mutations'][it]))
-            output.append("}}\n")
-            
-        output.append("\n= Post-threshold mutations =\n")
-        for it in range(0, len(mut_trait[list_categories[int(var)]]['threshold'])):
-            output.append("{{:")
-            output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['threshold'][it]))
-            output.append("}}\n")
+def generate_mutationthreshold_data(var): #variable var is the index of the list_categories list. Returns string.
+    output = []
+    if (var > len(list_categories)):
+        return output
+    output = [ "<!--Automatically generated using https://github.com/Soyweiser/CDDA-Wiki-Scripts mutationthresholds.py Any edits made to this can and will be overwritten. Please contact [[User:Soyweiser|Soyweiser]] if you want make changes to this page. -->\n= Traits = \n"]
+    for it in range(0, len(mut_trait[list_categories[int(var)]]['traits'])):
+        output.append("{{:")
+        output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['traits'][it]))
+        output.append("}}\n")
     
-        output.append("<!-- End of automatically generated data -->")
-        text = "".join(output)
-        text.replace("\n", "\\n")
-        print text
-        print list_categories[int(var)]
-        root.clipboard_clear()
-        root.clipboard_append(text)
-        root.update()
-        var = raw_input(">")
+    output.append("\n= Normal Mutations =\n")
+    for it in range(0, len(mut_trait[list_categories[int(var)]]['mutations'])):
+        output.append("{{:")
+        output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['mutations'][it]))
+        output.append("}}\n")
+        
+    output.append("\n= Post-threshold mutations =\n")
+    for it in range(0, len(mut_trait[list_categories[int(var)]]['threshold'])):
+        output.append("{{:")
+        output.append(ID_To_WikiString(mut_trait[list_categories[int(var)]]['threshold'][it]))
+        output.append("}}\n")
+    output.append("<!-- End of automatically generated data --><noinclude>This page is used to automatically include various mutations on the threshold mutation category page. Please don't edit this, but use [https://github.com/Soyweiser/CDDA-Wiki-Scripts mutationthresholds.py] to update this page.\n"+version+"</noinclude>")
+    text = "".join(output)
+    text.replace("\n", "\\n")
+    print "generated " + list_categories[var]
+    return text
+
+site = pywikibot.Site('en', 'cddawiki')
+for it in range(0, len(list_categories)):
+    output = generate_mutationthreshold_data(it)
+    if(list_categories[it].find("|") == -1):
+        pagename = "Template:Mutationthresholds/" + list_categories[it]
     else:
-        if ( var == 'exit' ):
-            root.update()
-            root.destroy()
-            exit()
+        pagename = "Template:Mutationthresholds/" + list_categories[it].split('|',2)[1]
+    page = pywikibot.Page(site, pagename)
+    page.text = output
+    page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts mutationthresholds.py script')
+exit()

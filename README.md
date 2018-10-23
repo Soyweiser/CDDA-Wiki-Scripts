@@ -54,11 +54,6 @@ Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/i
 
 Data is copied to clipboard, Used to create the a monster page. Does need some manual editing.
 
-## mutationthresholds.py
-
-Data is copied to clipboard, Used to create the various lists for the threshold pages.
-After executing, select the window running python again. And input a number. This creates a list of mutations copied into the clipboard. Copy and paste into the wiki. For the mapping between the input number and the page created look at the list_categories list. Start counting at zero.
-
 ## trait.py
 
 This script generates the individual pages for the traits/mutations. Works via command line. You need to give the index number of the trait/mutation for the text to generate. Generated text is automaticly placed in the clipboard. Use the mutation/trait id value (for example 'SHELL2') as a command line argument to get the index of that mutation.
@@ -70,6 +65,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 - materialtoname.py -> Template:Materialtoname
 - materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
 - mutationtable.py -> Template:Mutationtable
+- mutationthresholds.py -> creates various Template:Mutationthresholds/[mutation category name] pages, which are then included by the various mutation category pages.
 - navbar_trait.py -> Template:Navbar/traits
 - navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
 - foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
