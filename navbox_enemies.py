@@ -1,5 +1,6 @@
 import json
 import sys
+import string
 from version import version
 from name_hacks import monster_name
 import pywikibot
@@ -130,19 +131,19 @@ for it in range(0, len(monster_group_list)):
     monsters_list = []
     for ite in range(0, len(monster_cat_list)):
         if(monster_cat_list[ite]['cat'] == it):
-            if (monster_cat_list[ite]['id'] != monster_name(monster_cat_list[ite]['id']) and not monster_cat_list[ite]['id'] in monsters_list):
+            if (monster_cat_list[ite]['id'] != monster_name(monster_cat_list[ite]['id']) and not monster_name(monster_cat_list[ite]['id']) in monsters_list):
                 monsters_list.append(monster_name(monster_cat_list[ite]['id']))
             elif (not ID_To_String(monster_cat_list[ite]['id']) in monsters_list):
                 monsters_list.append(ID_To_String(monster_cat_list[ite]['id']))
-    monsters_list = sorted(monsters_list)
+    monsters_list = sorted(monsters_list, key=lambda s: s.lower())
     for ite in range(0, len(monsters_list)):
         output.append('''<!--
-  #-->''')
+  -->''')
         if ( ite > 0):
             output.append("{{md}}")
         output.append("[[" + capitalize(monsters_list[ite]) + "]]")
     output.append('''<!--
-  #-->
+  -->
 
 ''')
 
@@ -176,7 +177,7 @@ for it in range(0, len(monster_group_list)):
                 monsters_list.append(monster_name(monster_cat_list[ite]['id']))
             elif (not ID_To_String(monster_cat_list[ite]['id']) in monsters_list):
                 monsters_list.append(ID_To_String(monster_cat_list[ite]['id']))
-    monsters_list = sorted(monsters_list)
+    monsters_list = sorted(monsters_list, key=lambda s: s.lower())
     for ite in range(0, len(monsters_list)):
         output.append("{{:" + capitalize(monsters_list[ite]) + "}}\n")
     output.append(footer)
