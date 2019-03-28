@@ -208,8 +208,7 @@ while True:
                             output.append(types_muts_dict[cancel_types][ite])
                             output.append('-->')
                             if(ite+1 < len(types_muts_dict[cancel_types])):
-                                if( not types_muts_dict[cancel_types][ite+1] == data[var]["id"] ): #ignore the mutation we are creating
-                                    output.append(", ")
+                                 output.append(", ")
                     if(it+1 < len(data[var]["types"])):
                         output.append(", ")
             output.append('|')
@@ -321,8 +320,7 @@ while True:
             if( "MARLOSS" in data[var]["category"] ):
                 output.append('|marloss=1')
         #footer
-        output.append("""
-}}<noinclude>
+        output.append("""}}<noinclude>
 <div style="margin: 1em; border: 1px solid #aaa; background-color: #white; padding: 5px;">
 <h2><span class="plainlinks" style="float: right; font-size: small">
 ([[{{lc:{{PAGENAME}}}}/doc|<span title="View user added notes">View</span>]] - [{{fullurl:{{lc:{{PAGENAME}}}}/doc|action=edit}} <span title="Edit user notes">Edit Notes</span>] )</span>Notes</h2>
@@ -343,7 +341,7 @@ while True:
                 if( "hunger" in data[var] ):
                     output.append(" hunger")
                     if("thirst" in data[var]):
-                        output.append(", ")
+                        output.append(",")
                 if( "thirst" in data[var] ):
                     output.append(" thirst")
                 output.append(" points.")
@@ -589,16 +587,28 @@ while True:
         if( "social_modifiers" in data[var] ):
             if (isinstance(data[var]["social_modifiers"], dict)):
                 if( "lie" in data[var]['social_modifiers'] ):
-                    output.extend("* Increases chance of lying to [[NPC]]s by ")
-                    output.extend(str(data[var]['social_modifiers']['lie']))
+                    if( data[var]['social_modifiers']['lie'] >= 0 ):
+                        output.extend("* Increases ")
+                    else:
+                        output.extend("* Reduces ")
+                    output.extend("chance of lying to [[NPC]]s by ")
+                    output.extend(str(abs(data[var]['social_modifiers']['lie'])))
                     output.extend("%.\n")
                 if( "persuade" in data[var]['social_modifiers'] ):
-                    output.extend("* Increases chance of persuading [[NPC]]s to do your bidding by ")
-                    output.extend(str(data[var]['social_modifiers']['persuade']))
+                    if( data[var]['social_modifiers']['persuade'] >= 0 ):
+                        output.extend("* Increases ")
+                    else:
+                        output.extend("* Reduces ")
+                    output.extend("chance of persuading [[NPC]]s to do your bidding by ")
+                    output.extend(str(abs(data[var]['social_modifiers']['persuade'])))
                     output.extend("%.\n")
                 if( "intimidate" in data[var]['social_modifiers'] ):
-                    output.extend("* Increases chance of intimidating [[NPC]]s by ")
-                    output.extend(str(data[var]['social_modifiers']['intimidate']))
+                    if( data[var]['social_modifiers']['intimidate'] >= 0 ):
+                        output.extend("* Increases ")
+                    else:
+                        output.extend("* Reduces ")
+                    output.extend("chance of intimidating [[NPC]]s by ")
+                    output.extend(str(abs(data[var]['social_modifiers']['intimidate'])))
                     output.extend("%.\n")
         output.append("""<!-- 
 
