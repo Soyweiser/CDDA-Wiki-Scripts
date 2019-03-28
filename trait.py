@@ -1,4 +1,5 @@
 import json
+from name_hacks import trait_name
 from pprint import pprint
 from Tkinter import Tk
 root = Tk()
@@ -45,11 +46,14 @@ for iterator in range(0, len(data)): #fill the ID_mut dictionary with 'id' data,
 #    for ite in range(0, len(types_muts_dict[types_muts_names[it]])):
 #        print " " + types_muts_dict[types_muts_names[it]][ite]
 
-def ID_To_String(id): #TODO: fix this wikipagename hack with a more generalized one.
-    if (ID_mut[id]["name"] == "Infrared Vision"):
-        return "Infrared Vision (Mutation)|Infrared Vision"
-    else:
+def ID_To_String(id): #Use the name_hacks.py file for some name hacks.
+    retval = trait_name (id)
+    print id
+    print retval
+    if (retval == id):
         return ID_mut[id]["name"]
+    else:
+        return retval
 
 def ID_To_int(id):
     if(id in ID_mut):
