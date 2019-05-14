@@ -43,8 +43,12 @@ In the [location of pywikibotinstall] run `python .\pwb.py generate_user_files` 
 
 ## bionics.py
 
-Data is copied to clipboard, used for the Bionics, doesn't work on bionics that are not defined in 'data\json\bionics.json'
-Microreactor upgrade CBM will need to be fixed manually.
+Data can be automatically copied to the wiki bionic pages.
+Usage: python [location of pywikibotinstall]\pwb.py bionics.py
+   Either input 'all' or 'ALL', and then your password, and wait for the pages to be updated.
+   Or: Input a bionic ID from 'data/json/bionics.json' to get the position of that bionic in the data list.
+   Or: Input an integer, which will print the generate page of that bionic on screen, and copy it to the clipboard.
+Doesn't work on bionics that are not defined in 'data\json\bionics.json'
 
 ## materials.py
 
@@ -61,6 +65,7 @@ This script generates the individual pages for the traits/mutations. Works via c
 ## Automated scripts
 The following scripts simply use pywikibot to upload content to the pages automatically.
 - bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
+- bionics.py -> use the 'all' command to update all the bionic pages.
 - comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
 - materialtoname.py -> Template:Materialtoname
 - materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
