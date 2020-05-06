@@ -84,3 +84,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 ## Pywikibot can't connect to the site. Error mentions that 'http' is not a valid protocol return value.
 
 Seems they fixed the bug. (According to the documentation the 'http' protocol value is not allowed).
+
+## Getting a strange crash while processing the json files.
+
+In some rare cases people used a ` instead of a ' this can cause some issues. You prob need to manually edit the json files and change the ` into a '. Prob also best to make a PR to fix the wrong character in the main json files.
