@@ -8,6 +8,7 @@ root = Tk()
 root.withdraw()
 
 #Data is copied to clipboard, used for the Monsters
+## accepts a mon_id value like mon_zombie, which returns the monster ID number, or a int which prints that the monster data of that number, or '_idtotal' which shows the total number of monsters.
 
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 
@@ -386,6 +387,9 @@ while True:
             root.update()
             root.destroy()
             exit()
+        if ( var == '_idtotal' ): #prints the max number of monsters
+            print len(data)
+            var = raw_input(">")
         else:
             print ID_To_Mon_Int(var)
             var = raw_input(">")
