@@ -55,6 +55,10 @@ def ID_To_String(id): #Use the name_hacks.py file for some name hacks.
     else:
         return retval
 
+def PageName(id): #returns the pagename of the wiki page, slightly differs from ID_To_String due to ID_To_String leaving in wiki formatting (such as 'Prototype (threshold mutation)|Prototype').
+#The ID argument is the integer position of the trait in the data list.
+    return ID_To_String(data[id]['id']).split('|',1)[0]
+
 def ID_To_int(id):
     if(id in ID_mut):
         return ID_mut[id]["id_nr"]
@@ -616,7 +620,7 @@ while True:
                     output.extend("%.\n")
         output.append("""<!-- 
 
-*YOUR PERSONAL NOTES AND HINTS SHOULD GO IN THE """ + ID_To_String(data[var]['id']).split('|',1)[0] +"""/doc PAGE DO NOT EDIT HERE*
+*YOUR PERSONAL NOTES AND HINTS SHOULD GO IN THE """ + PageName(var) +"""/doc PAGE DO NOT EDIT HERE*
 
 -->
 {{#ifexist:{{lc:{{PAGENAME}}}}/doc| {{:{{lc:{{PAGENAME}}}}/doc}} |}}<!-- list the doc page if it exists-->
@@ -643,6 +647,15 @@ while True:
             root.update()
             root.destroy()
             exit()
+        elif ( var == 'all' or var == 'ALL' ):
+            site = pywikibot.Site('en', 'cddawiki')
+            for x in range(0, len(data)):
+                text = generatePage(x)
+                #if( text != []): #check if the bionic isn't obsolete.
+                #    page = pywikibot.Page(site, PageName(x) )
+                #    page.text = text
+                #    page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts trait.py script')
+            var = raw_input(">")
         else:
             print ID_To_int(var)
             var = raw_input(">")
