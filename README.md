@@ -56,7 +56,13 @@ Data is copied to clipboard, used for the http://cddawiki.chezzo.com/cdda_wiki/i
 
 ## monsters.py
 
-Data is copied to clipboard, Used to create the a monster page. Does need some manual editing.
+Data can be automatically copied to the wiki monster pages.
+Usage: python [location of pywikibotinstall]\pwb.py monsters.py
+   Either input 'all' or 'ALL', and then your password, and wait for the pages to be updated.
+   Or: Input a monster ID (for example 'mon_zombie') from one of the files in list_monster_files to get the position of that monster in the data list.
+   Or: Input an integer, which will print the generate page of that monster on screen, and copy it to the clipboard.
+   Or: Input '_idtotal', which will print the total number of monsters. (note: the monster id numbers starts to count at 0, and the _idtotal starts counting at 1.
+If the monster id/integer shares the name with other monsters, and all those various monsters will be merged into one page for the wiki.
 
 ## trait.py
 
@@ -69,6 +75,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 - comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
 - materialtoname.py -> Template:Materialtoname
 - materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
+- monsters.py -> use the 'all' command to update all the monster pages.
 - mutationtable.py -> Template:Mutationtable
 - mutationthresholds.py -> creates various Template:Mutationthresholds/[mutation category name] pages, which are then included by the various mutation category pages.
 - navbar_trait.py -> Template:Navbar/traits

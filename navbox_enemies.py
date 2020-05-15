@@ -15,7 +15,7 @@ import pywikibot
 
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]
 
-monster_group_list = [ 'Domesticated Animals', 'Forest Animals', 'River animals', 'Wild Mutants', 'Insectoids', 'Giant worms', 'Zombies', 'Zombie Animals', 'Plants', 'Fungi', 'Blobs', 'Underground dwellers', 'Swamp creatures', 'Spiders', 'Unearthed horrors', 'Netherworld inhabitants', 'Cult', 'Robots', 'Hallucinations', 'Joke Monsters', 'Other', 'ignored' ]
+monster_group_list = [ 'Domesticated Animals', 'Forest Animals', 'River animals', 'Wild Mutants', 'Insectoids', 'Giant worms', 'Zombies', 'Zombie Animals', 'Plants', 'Fungi', 'Blobs', 'Underground dwellers', 'Swamp creatures', 'Spiders', 'Unearthed horrors', 'Netherworld inhabitants', 'Cult', 'Robots', 'Hallucinations', 'Crazy Cataclysm', 'Other', 'ignored' ]
 
 monster_cat_list_file = "wiki_data/monsters_list.json"
 
