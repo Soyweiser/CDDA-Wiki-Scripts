@@ -60,13 +60,19 @@ Data can be automatically copied to the wiki monster pages.
 Usage: python [location of pywikibotinstall]\pwb.py monsters.py
    Either input 'all' or 'ALL', and then your password, and wait for the pages to be updated.
    Or: Input a monster ID (for example 'mon_zombie') from one of the files in list_monster_files to get the position of that monster in the data list.
-   Or: Input an integer, which will print the generate page of that monster on screen, and copy it to the clipboard.
+   Or: Input an integer, which will print the generated page of that monster on screen, and copy it to the clipboard.
    Or: Input '_idtotal', which will print the total number of monsters. (note: the monster id numbers starts to count at 0, and the _idtotal starts counting at 1.
+   Input 'exit' to exit
 If the monster id/integer shares the name with other monsters, and all those various monsters will be merged into one page for the wiki.
 
 ## trait.py
 
-This script generates the individual pages for the traits/mutations. Works via command line. You need to give the index number of the trait/mutation for the text to generate. Generated text is automaticly placed in the clipboard. Use the mutation/trait id value (for example 'SHELL2') as a command line argument to get the index of that mutation.
+Data can be automatically copied to the wiki mutation pages.
+Usage: python [location of pywikibotinstall]\pwb.py trait.py
+   Either input 'all' or 'ALL', and then your password, and wait for the pages to be updated.
+   Or: Input a mutation ID to get the mutations location in the array. These are supposed to be permanent ID's.
+   Or: Input an integer, which will print the generated page of that mutation on screen, and copy it to the clipboard.
+   input 'exit' to exit
 
 ## Automated scripts
 The following scripts simply use pywikibot to upload content to the pages automatically.
@@ -82,6 +88,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 - navbox_enemies.py -> Template:Navbox/enemies, and various Template:Enemiestable/ pages.
 - foragingList.py -> Template:ItemGroup/forage_spring, Template:ItemGroup/forage_summer, Template:ItemGroup/forage_autumn, Template:ItemGroup/forage_winter, Template:ItemGroup/trash_forest
 - techniques.py -> Template:TECtoname page.
+- traits.py -> use the 'all' command to update all the mutations pages.
 - speciestoname.py -> Template:Speciestoname
 - speciesangers.py -> Template:Speciesangers
 - speciesfears.py -> Template:Speciesfears

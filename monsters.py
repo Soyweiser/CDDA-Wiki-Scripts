@@ -13,8 +13,9 @@ root.withdraw()
 #Usage: python [location of pywikibotinstall]\pwb.py monsters.py
 #   Either input 'all' or 'ALL', and then your password, and wait for the pages to be updated.
 #   Or: Input a monster ID (for example 'mon_zombie') from one of the files in list_monster_files to get the position of that monster in the data list.
-#   Or: Input an integer, which will print the generate page of that monster on screen, and copy it to the clipboard.
+#   Or: Input an integer, which will print the generated page of that monster on screen, and copy it to the clipboard.
 #   Or: Input '_idtotal', which will print the total number of monsters. (note: the monster id numbers starts to count at 0, and the _idtotal starts counting at 1.
+#   Input 'exit' to exit
 #If the monster id/integer shares the name with other monsters, and all those various monsters will be merged into one page for the wiki.
 
 list_monster_files = [ 'data/json/monsters.json', 'data/json/monsters/bird.json', 'data/json/monsters/defense_bot.json', 'data/json/monsters/drones.json', 'data/json/monsters/fish.json', 'data/json/monsters/insect_spider.json', 'data/json/monsters/mammal.json', 'data/json/monsters/military.json', 'data/json/monsters/reptile_amphibian.json', 'data/json/monsters/triffid.json', 'data/json/monsters/zed_children.json', 'data/json/monsters/zed_explosive.json' ]

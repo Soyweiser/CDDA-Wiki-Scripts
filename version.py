@@ -1,1 +1,1 @@
-version = "{{ver|0.D}}\n"
+version = "{{ver|0.E}}\n"
