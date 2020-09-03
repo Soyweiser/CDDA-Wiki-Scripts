@@ -633,6 +633,19 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend(str((1 - abs(data[var]["attackcost_modifier"])) * 100))
             output.extend("%.\n")
     
+    #Martial Arts
+    if( "initial_ma_styles" in data[var] ):
+        if (isinstance(data[var]["initial_ma_styles"], list)):
+            output.extend("* This trait gives access to one of the following [[Martial arts|martial art styles]]: ")
+            for it in range(0, len(data[var]["initial_ma_styles"])):
+                output.extend("{{MArttoname|")
+                output.extend(data[var]["initial_ma_styles"][it])
+                output.extend("}}")
+                if(not(it+1 == len(data[var]["initial_ma_styles"]))):
+                    output.extend(", ")
+                else:
+                    output.extend(".\n")
+    
     #Passive mods
     if( "passive_mods" in data[var] ):
         if( "str_mod" in data[var]["passive_mods"] ):
