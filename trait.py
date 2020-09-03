@@ -568,6 +568,71 @@ def generatePage (var): #generates all the data which should be in one of the wi
         output.extend(str(abs(data[var]["healing_resting"])))
         output.extend(".\n")
         
+    #Speed mods
+    if( "reading_speed_multiplier" in data[var] ):
+        if( data[var]["reading_speed_multiplier"] >= 1 ):
+            output.extend("* Increases ")
+        else:
+            output.extend("* Reduces ")
+        output.extend("[[books]] reading time to ")
+        output.extend(str(abs(data[var]["reading_speed_multiplier"]) * 100))
+        output.extend("% of normal.\n")
+    if( "movecost_modifier" in data[var] ):
+        if( data[var]["movecost_modifier"] >= 1 ):
+            output.extend("* Increases movement cost by ")
+            output.extend(str((abs(data[var]["movecost_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces movement cost by ")
+            output.extend(str((1 - abs(data[var]["movecost_modifier"])) * 100))
+            output.extend("%.\n")
+    if( "movecost_flatground_modifier" in data[var] ):
+        if( data[var]["movecost_flatground_modifier"] >= 1 ):
+            output.extend("* Increases movement cost on flat ground by ")
+            output.extend(str((abs(data[var]["movecost_flatground_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces movement cost on flat ground by ")
+            output.extend(str((1 - abs(data[var]["movecost_flatground_modifier"])) * 100))
+            output.extend("%.\n")
+    if( "movecost_swim_modifier" in data[var] ):
+        if( data[var]["movecost_swim_modifier"] >= 1 ):
+            output.extend("* Increases swimming movement cost by roughly ")
+            output.extend(str((abs(data[var]["movecost_swim_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces swimming movement cost by roughly ")
+            output.extend(str((1 - abs(data[var]["movecost_swim_modifier"])) * 100))
+            output.extend("%.\n")
+    if( "movecost_obstacle_modifier" in data[var] ):
+        if( data[var]["movecost_obstacle_modifier"] >= 1 ):
+            output.extend("* Increases movement cost on difficulty terrain (movecost > 100) by ")
+            output.extend(str((abs(data[var]["movecost_obstacle_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces movement cost on difficulty terrain (movecost > 100) by ")
+            output.extend(str((1 - abs(data[var]["movecost_obstacle_modifier"])) * 100))
+            output.extend("%. (minimum move cost is still 100).\n")
+    if( "speed_modifier" in data[var] ):
+        if( data[var]["speed_modifier"] >= 1 ):
+            output.extend("* Increases speed by ")
+            output.extend(str((abs(data[var]["speed_modifier"]) - 1) * 100))
+            output.extend("%. This basically makes you do everything faster.\n")
+        else:
+            output.extend("* Reduces speed (which influences the amount of actions taken) by ")
+            output.extend(str((1 - abs(data[var]["speed_modifier"])) * 100))
+            output.extend("%. This basically makes you do everything slower.\n")
+    # if( "temperature_speed_modifier" in data[var] ): no need to include this, mutation descriptions already do.
+    if( "attackcost_modifier" in data[var] ):
+        if( data[var]["attackcost_modifier"] >= 1 ):
+            output.extend("* Increases attack and throwing cost by ")
+            output.extend(str((abs(data[var]["attackcost_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces attack and throwing cost by ")
+            output.extend(str((1 - abs(data[var]["attackcost_modifier"])) * 100))
+            output.extend("%.\n")
+    
     #Passive mods
     if( "passive_mods" in data[var] ):
         if( "str_mod" in data[var]["passive_mods"] ):
