@@ -79,6 +79,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 - bionicsList.py -> Template:List/bionics‎‎, Template:List/faultybionics‎‎
 - bionics.py -> use the 'all' command to update all the bionic pages.
 - comestiblesList.py -> Template:Comestibles/food, Template:Comestibles/Drinks, Template:Comestibles/Meds, Template:Comestibles/Seeds, Template:Comestibles/Mutagen
+- martialartstoname.py -> Template:MArttoname
 - materialtoname.py -> Template:Materialtoname
 - materialresistances.py -> Template:Matbashres, Template:Matfireres, Template:Matcutres, Template:Matelecres, Template:Matacidres
 - monsters.py -> use the 'all' command to update all the monster pages.
