@@ -551,6 +551,15 @@ def generatePage (var): #generates all the data which should be in one of the wi
         output.extend("the rate at which [[Hidden_stats#Stamina|stamina]] regenerates by ")
         output.extend(str(abs(data[var]["stamina_regen_modifier"]) * 100))
         output.extend("%.\n")
+    if( "max_stamina_modifier" in data[var] ):
+        if( data[var]["max_stamina_modifier"] >= 1 ):
+            output.extend("* Increases max stamina by ")
+            output.extend(str((abs(data[var]["max_stamina_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces max stamina by ")
+            output.extend(str((1 - abs(data[var]["max_stamina_modifier"])) * 100))
+            output.extend("%.\n")
     if( "healing_awake" in data[var] ):
         if( data[var]["healing_awake"] >= 0 ):
             output.extend("* Increases ")
@@ -567,6 +576,15 @@ def generatePage (var): #generates all the data which should be in one of the wi
         output.extend("the rate of [[Stats#Hit points|healing]] while [[Sleep|sleeping]] by ")
         output.extend(str(abs(data[var]["healing_resting"])))
         output.extend(".\n")
+    if( "mending_modifier" in data[var] ):
+        if( data[var]["mending_modifier"] >= 1 ):
+            output.extend("* Increases the rate at which [[Broken limb|broken limbs]] heal by ")
+            output.extend(str((abs(data[var]["mending_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces the rate at which [[Broken limb|broken limbs]] heal by ")
+            output.extend(str((1 - abs(data[var]["mending_modifier"])) * 100))
+            output.extend("%.\n")
         
     #Speed mods
     if( "reading_speed_multiplier" in data[var] ):
