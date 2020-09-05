@@ -268,6 +268,9 @@ def generatePage (var): #generates all the data which should be in one of the wi
     else:
         output.append(data[var]["description"])
     
+    if( "mixed_effect" in data[var]): #mixed effect is when a trait is used to show a mutation is neither just good or just bad.
+        output.append('|mixed_effect=1')
+    
     if( "starting_trait" in data[var]):
         output.append('|trait=1')
     
@@ -649,6 +652,17 @@ def generatePage (var): #generates all the data which should be in one of the wi
         else:
             output.extend("* Reduces attack and throwing cost by ")
             output.extend(str((1 - abs(data[var]["attackcost_modifier"])) * 100))
+            output.extend("%.\n")
+    
+    #Carrying capacity
+    if( "weight_capacity_modifier" in data[var] ):
+        if( data[var]["weight_capacity_modifier"] >= 1 ):
+            output.extend("* Increases maximum [[weight|carry weight]] by ")
+            output.extend(str((abs(data[var]["weight_capacity_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces maximum [[weight|carry weight]] by ")
+            output.extend(str((1 - abs(data[var]["weight_capacity_modifier"])) * 100))
             output.extend("%.\n")
     
     #Martial Arts
