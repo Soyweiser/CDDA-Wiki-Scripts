@@ -697,6 +697,17 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend(str(data[var]["passive_mods"]["per_mod"]))
             output.extend(".\n")
     
+    #Skill mods
+    if( "dodge_modifier" in data[var] ):
+        if( data[var]["dodge_modifier"] >= 0 ):
+            output.extend("* Increases [[Skills#Dodge|dodge]] by ")
+            output.extend(str(abs(data[var]["dodge_modifier"])))
+            output.extend(".\n")
+        else:
+            output.extend("* Decreases [[Skills#Dodge|dodge]] by ")
+            output.extend(str(abs(data[var]["dodge_modifier"])))
+            output.extend(".\n")
+    
     #Convert attacks.
     if( "attacks" in data[var] ):
         if (isinstance(data[var]["attacks"], list)):
