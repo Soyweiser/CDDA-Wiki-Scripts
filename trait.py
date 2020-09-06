@@ -696,6 +696,10 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend("* Modifies [[Stats|perception]] by ")
             output.extend(str(data[var]["passive_mods"]["per_mod"]))
             output.extend(".\n")
+    if( "str_modifier" in data[var] ):
+            output.extend("* Modifies [[Stats|strength]] by ")
+            output.extend(str(data[var]["str_modifier"]))
+            output.extend(". Note this strenght mod does not change HP.\n")
     
     #Skill mods
     if( "dodge_modifier" in data[var] ):
@@ -707,6 +711,44 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend("* Decreases [[Skills#Dodge|dodge]] by ")
             output.extend(str(abs(data[var]["dodge_modifier"])))
             output.extend(".\n")
+    
+    #damage mods
+    if( "cut_dmg_bonus" in data[var] ):
+        if( data[var]["cut_dmg_bonus"] >= 0 ):
+            output.extend("* Increases ")
+        else:
+            output.extend("* Reduces ")
+        output.extend("dealt unarmed cut damage by ")
+        output.extend(str(abs(data[var]["cut_dmg_bonus"])))
+        output.extend(".\n")
+    if( "pierce_dmg_bonus" in data[var] ):
+        if( data[var]["pierce_dmg_bonus"] >= 0 ):
+            output.extend("* Increases ")
+        else:
+            output.extend("* Reduces ")
+        output.extend("dealt unarmed pierce damage by ")
+        output.extend(str(abs(data[var]["pierce_dmg_bonus"])))
+        output.extend(".\n")
+    if( "rand_cut_bonus" in data[var] ): #going to assume this is always a positive value and that min < max.
+        output.extend("* Increases dealt unarmed cut damage by between ")
+        output.extend(str(abs(data[var]["rand_cut_bonus"]["min"])))
+        output.extend(" and ")
+        output.extend(str(abs(data[var]["rand_cut_bonus"]["max"])))
+        output.extend(" damage.\n")
+    if( "bash_dmg_bonus" in data[var] ):
+        if( data[var]["bash_dmg_bonus"] >= 0 ):
+            output.extend("* Increases ")
+        else:
+            output.extend("* Reduces ")
+        output.extend("dealt unarmed bash damage by ")
+        output.extend(str(abs(data[var]["bash_dmg_bonus"])))
+        output.extend(".\n")        
+    if( "rand_bash_bonus" in data[var] ): #going to assume this is always a positive value and that min < max.
+        output.extend("* Increases dealt unarmed cut damage by between ")
+        output.extend(str(abs(data[var]["rand_bash_bonus"]["min"])))
+        output.extend(" and ")
+        output.extend(str(abs(data[var]["rand_bash_bonus"]["max"])))
+        output.extend(" damage.\n")
     
     #Convert attacks.
     if( "attacks" in data[var] ):
