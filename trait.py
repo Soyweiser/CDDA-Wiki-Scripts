@@ -757,6 +757,13 @@ def generatePage (var): #generates all the data which should be in one of the wi
                 output.extend(Attack_To_String(data[var]["attacks"][it]))
         else:
             output.extend(Attack_To_String(data[var]["attacks"]))
+    if('ranged_mutation' in data[var]):
+        output.append("* This gives the use of the following ranged weapon [http://cdda-trunk.chezzo.com/")
+        output.append(str(data[var]['ranged_mutation']['type']))
+        output.append(" ")
+        output.append(str(data[var]['ranged_mutation']['type']))
+        output.append("]")
+    
     #Convert social modifiers.
     if( "social_modifiers" in data[var] ):
         if (isinstance(data[var]["social_modifiers"], dict)):
