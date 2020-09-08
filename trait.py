@@ -791,6 +791,18 @@ def generatePage (var): #generates all the data which should be in one of the wi
                 output.extend("chance of intimidating [[NPC]]s by ")
                 output.extend(str(abs(data[var]['social_modifiers']['intimidate'])))
                 output.extend("%.\n")
+    
+    #skill_rust_multiplier
+    if( "skill_rust_multiplier" in data[var] ):
+        if( data[var]["skill_rust_multiplier"] >= 1 ):
+            output.extend("* Decreases speed of [[Skills#Skill_Rust|skill rust]] by ")
+            output.extend(str((abs(data[var]["skill_rust_multiplier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Increases speed of [[Skills#Skill_Rust|skill rust]] by ")
+            output.extend(str((1 - abs(data[var]["skill_rust_multiplier"])) * 100))
+            output.extend("%.\n")
+
     output.append("""<!-- 
 
 *YOUR PERSONAL NOTES AND HINTS SHOULD GO IN THE """ + PageName(var) +"""/doc PAGE DO NOT EDIT HERE*
