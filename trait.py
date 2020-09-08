@@ -792,6 +792,17 @@ def generatePage (var): #generates all the data which should be in one of the wi
                 output.extend(str(abs(data[var]['social_modifiers']['intimidate'])))
                 output.extend("%.\n")
     
+    #map_memory_capacity_multiplier
+    if( "map_memory_capacity_multiplier" in data[var] ):
+        if( data[var]["map_memory_capacity_multiplier"] >= 1 ):
+            output.extend("* Increases amount of map squares remembered by ")
+            output.extend(str((abs(data[var]["map_memory_capacity_multiplier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Decreases amount of map squares remembered by ")
+            output.extend(str((1 - abs(data[var]["map_memory_capacity_multiplier"])) * 100))
+            output.extend("%.\n")
+    
     #skill_rust_multiplier
     if( "skill_rust_multiplier" in data[var] ):
         if( data[var]["skill_rust_multiplier"] >= 1 ):
