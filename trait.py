@@ -809,11 +809,11 @@ def generatePage (var): #generates all the data which should be in one of the wi
         elif( data[var]["overmap_sight"] > 0 ):
             output.extend("* Increases the base distance of which you can spot landmarks and other buildings on the overmap by ")
             output.extend(str(abs(data[var]["overmap_sight"])))
-            output.extend("%.\n")
+            output.extend(" squares.\n")
         else:
             output.extend("* Decreases the base distance of which you can spot landmarks and other buildings on the overmap by ")
             output.extend(str(abs(data[var]["overmap_sight"])))
-            output.extend("%. (Mininum daylight sight range is 3).\n")
+            output.extend(" squares. (Mininum daylight sight range is 3).\n")
     
     #skill_rust_multiplier
     if( "skill_rust_multiplier" in data[var] ):
