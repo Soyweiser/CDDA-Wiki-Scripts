@@ -813,6 +813,31 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend("* Increases speed of [[Skills#Skill_Rust|skill rust]] by ")
             output.extend(str((1 - abs(data[var]["skill_rust_multiplier"])) * 100))
             output.extend("%.\n")
+    
+    #noise_modifier
+    if( "noise_modifier" in data[var] ):
+        if( data[var]["noise_modifier"] == 0.0 ):
+            output.extend("* Removes all [[noise]] made while walking.\n")
+        elif( data[var]["noise_modifier"] >= 1 ):
+            output.extend("* Increases [[noise]] made while walking by ")
+            output.extend(str((abs(data[var]["noise_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces [[noise]] made while walking by ")
+            output.extend(str((1 - abs(data[var]["noise_modifier"])) * 100))
+            output.extend("%.\n")
+    #hearing_modifier
+    if( "hearing_modifier" in data[var] ):
+        if( data[var]["hearing_modifier"] == 0.0 ):
+            output.extend("* Removes ability to [[hearing|hear]] things.\n")
+        elif( data[var]["hearing_modifier"] >= 1 ):
+            output.extend("* Increases [[hearing]] ability by ")
+            output.extend(str((abs(data[var]["hearing_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Reduces [[hearing]] ability by ")
+            output.extend(str((1 - abs(data[var]["hearing_modifier"])) * 100))
+            output.extend("%.\n")
 
     output.append("""<!-- 
 
