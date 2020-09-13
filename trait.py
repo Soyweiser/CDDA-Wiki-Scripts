@@ -869,9 +869,12 @@ def generatePage (var): #generates all the data which should be in one of the wi
     if( "vitamins_absorb_multi" in data[var] ):
         output.extend("* Changes [[vitamins|vitamin]] absorbion rate when consuming:\n")
         for it in range(0, len(data[var]["vitamins_absorb_multi"])):
-            output.extend("** {{Materialtoname|")
-            output.extend(str(data[var]["vitamins_absorb_multi"][it][0]))
-            output.extend("}} in the following ways:")
+            if(data[var]["vitamins_absorb_multi"][it][0] == "all"):
+                output.extend("** All food types in the following ways:")
+            else:
+                output.extend("** {{Materialtoname|")
+                output.extend(str(data[var]["vitamins_absorb_multi"][it][0]))
+                output.extend("}} in the following ways:")
             for ite in range(0, len(data[var]["vitamins_absorb_multi"][it][1])):
                 output.extend(" {{Vitaminstoname|")
                 output.extend(str(data[var]["vitamins_absorb_multi"][it][1][ite][0]))
