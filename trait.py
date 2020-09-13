@@ -855,13 +855,13 @@ def generatePage (var): #generates all the data which should be in one of the wi
     if( "vitamin_rates" in data[var] ):
         for it in range(0, len(data[var]["vitamin_rates"])):
             if( data[var]["vitamin_rates"][it][1] > 0 ):
-                output.extend("* consumes ")
+                output.extend("* Consumes ")
                 output.extend(str(abs(data[var]["vitamin_rates"][it][1])))
                 output.extend(" units of the {{Vitaminstoname|")
                 output.extend(str(data[var]["vitamin_rates"][it][0]))
                 output.extend("}} [[vitamins|vitamin]] per minute.\n")
             else:
-                output.extend("* produces ")
+                output.extend("* Produces ")
                 output.extend(str(abs(data[var]["vitamin_rates"][it][1])))
                 output.extend(" units of the {{Vitaminstoname|")
                 output.extend(str(data[var]["vitamin_rates"][it][0]))
@@ -889,6 +889,34 @@ def generatePage (var): #generates all the data which should be in one of the wi
                     output.extend("decreased by ")
                     output.extend(str((1 - data[var]["vitamins_absorb_multi"][it][1][ite][1]) * 100))
                     output.extend("%.")
+    
+    #Scents
+    if( "scent_modifier" in data[var] ):
+        if( data[var]["scent_modifier"] >= 1 ):
+            output.extend("* Increases intensity of your [[scent|smell]] by ")
+            output.extend(str((abs(data[var]["scent_modifier"]) - 1) * 100))
+            output.extend("%.\n")
+        else:
+            output.extend("* Decreases intensity of your [[scent|smell]] by ")
+            output.extend(str((1 - abs(data[var]["scent_modifier"])) * 100))
+            output.extend("%.\n")
+    if( "scent_intensity" in data[var] ):
+        output.extend("* Changes your [[scent|scent intensity]] to ")
+        output.extend(str(data[var]["scent_intensity"]))
+        output.extend(". (default is 500).\n")
+    if( "scent_mask" in data[var] ):
+        if( data[var]["scent_mask"] > 0 ):
+            output.extend("* Adds ")
+            output.extend(str(abs(data[var]["scent_mask"])))
+            output.extend(" points to your [[scent|scent value]]. (this is called a scent mask)\n")
+        else:
+            output.extend("* Subtracts ")
+            output.extend(str(abs(data[var]["scent_mask"])))
+            output.extend(" points from your [[scent|scent value]]. (this is called a scent mask)\n")
+    if( "scent_type" in data[var] ):
+        output.extend("* Changes your [[scent]] type to ")
+        output.extend(str(data[var]["scent_type"]))
+        output.extend(".\n")
 
     output.append("""<!-- 
 
