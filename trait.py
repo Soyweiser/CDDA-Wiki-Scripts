@@ -850,6 +850,42 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend("* Reduces [[hearing]] ability by ")
             output.extend(str((1 - abs(data[var]["hearing_modifier"])) * 100))
             output.extend("%.\n")
+    
+    #vitamins
+    if( "vitamin_rates" in data[var] ):
+        for it in range(0, len(data[var]["vitamin_rates"])):
+            if( data[var]["vitamin_rates"][it][1] > 0 ):
+                output.extend("* consumes ")
+                output.extend(str(abs(data[var]["vitamin_rates"][it][1])))
+                output.extend(" units of the {{Vitaminstoname|")
+                output.extend(str(data[var]["vitamin_rates"][it][0]))
+                output.extend("}} [[vitamins|vitamin]] per minute.\n")
+            else:
+                output.extend("* produces ")
+                output.extend(str(abs(data[var]["vitamin_rates"][it][1])))
+                output.extend(" units of the {{Vitaminstoname|")
+                output.extend(str(data[var]["vitamin_rates"][it][0]))
+                output.extend("}} [[vitamins|vitamin]] per minute.\n")
+    if( "vitamins_absorb_multi" in data[var] ):
+        output.extend("* Changes [[vitamins|vitamin]] absorbion rate when consuming:\n")
+        for it in range(0, len(data[var]["vitamins_absorb_multi"])):
+            output.extend("** {{Materialtoname|")
+            output.extend(str(data[var]["vitamins_absorb_multi"][it][0]))
+            output.extend("}} in the following ways:")
+            for ite in range(0, len(data[var]["vitamins_absorb_multi"][it][1])):
+                output.extend(" {{Vitaminstoname|")
+                output.extend(str(data[var]["vitamins_absorb_multi"][it][1][ite][0]))
+                output.extend("}} is ")
+                if(data[var]["vitamins_absorb_multi"][it][1][ite][1] == 0):
+                    output.extend("reduced to nothing.")
+                elif(data[var]["vitamins_absorb_multi"][it][1][ite][1] >= 1):
+                    output.extend("increased by ")
+                    output.extend(str((data[var]["vitamins_absorb_multi"][it][1][ite][1] - 1) * 100))
+                    output.extend("%.")
+                else:
+                    output.extend("decreased by ")
+                    output.extend(str((1 - data[var]["vitamins_absorb_multi"][it][1][ite][1]) * 100))
+                    output.extend("%.")
 
     output.append("""<!-- 
 
