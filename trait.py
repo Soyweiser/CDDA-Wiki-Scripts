@@ -764,6 +764,23 @@ def generatePage (var): #generates all the data which should be in one of the wi
         output.append(str(data[var]['ranged_mutation']['type']))
         output.append("]")
     
+    #Crafting modifiers
+    if( "craft_skill_bonus" in data[var] ):
+        output.extend("* Skill modifiers while [[crafting]]:\n")
+        for it in range(0, len(data[var]["craft_skill_bonus"])):
+            if(data[var]["craft_skill_bonus"][it][1] > 0):
+                output.extend("** ")
+                output.extend(str(data[var]["craft_skill_bonus"][it][0]))
+                output.extend(" gets increased by: ")
+                output.extend(str(data[var]["craft_skill_bonus"][it][1]))
+                output.extend(".\n")
+            else:
+                output.extend("** ")
+                output.extend(str(data[var]["craft_skill_bonus"][it][0]))
+                output.extend(" gets decreased by: ")
+                output.extend(str(data[var]["craft_skill_bonus"][it][1]))
+                output.extend(".\n")
+    
     #Convert social modifiers.
     if( "social_modifiers" in data[var] ):
         if (isinstance(data[var]["social_modifiers"], dict)):
