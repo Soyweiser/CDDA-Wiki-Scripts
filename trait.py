@@ -934,6 +934,13 @@ def generatePage (var): #generates all the data which should be in one of the wi
         output.extend("* Changes your [[scent]] type to ")
         output.extend(str(data[var]["scent_type"]))
         output.extend(".\n")
+    
+    #Flags
+    if( "flags" in data[var] ):
+        for it in range(0, len(data[var]["flags"])):
+            output.extend("* {{Mutationflags|")
+            output.extend(str(data[var]["flags"][it]))
+            output.extend("}}.\n")
 
     output.append("""<!-- 
 
