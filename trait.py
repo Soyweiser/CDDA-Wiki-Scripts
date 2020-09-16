@@ -941,6 +941,19 @@ def generatePage (var): #generates all the data which should be in one of the wi
             output.extend("* {{Mutationflags|")
             output.extend(str(data[var]["flags"][it]))
             output.extend("}}.\n")
+    #lumination
+    #"lumination": [ [ "HEAD", 8 ] ]
+    if( "lumination" in data[var] ):
+        output.extend("* Some of your bodyparts now emit light: ")
+        for it in range(0, len(data[var]["lumination"])):
+            if (it > 0):
+                output.append(", ")
+            output.extend("{{btt|")
+            output.extend(str(data[var]["lumination"][it][0]))
+            output.extend("}} lights up ")
+            output.extend(str(data[var]["lumination"][it][1]))
+            output.extend(" squares")
+        output.extend(".\n")
 
     output.append("""<!-- 
 
