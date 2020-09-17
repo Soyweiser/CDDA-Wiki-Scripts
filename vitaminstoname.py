@@ -39,5 +39,5 @@ text.replace("\n", "\\n")
 site = pywikibot.Site('en', 'cddawiki')
 page = pywikibot.Page(site, 'Template:Vitaminstoname')
 page.text = text
-page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts vitamin.py script')
+page.save('Updated text automatically via the https://github.com/Soyweiser/CDDA-Wiki-Scripts vitaminstoname.py script')
 exit()

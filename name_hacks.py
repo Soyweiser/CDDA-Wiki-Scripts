@@ -6,6 +6,8 @@ trait_name_hacks = { 'DEAF': 'Deaf (Mutation)|Deaf', 'INFRARED' : 'infrared Visi
 
 bionics_name_hacks = { 'bio_armor_arms' : 'Arms Alloy Plating', 'bio_armor_head' : 'Head Alloy Plating', 'bio_armor_legs' : 'Legs Alloy Plating', 'bio_armor_torso' : 'Torso Alloy Plating', 'bio_reactor' : 'Internal Microreactor' }
 
+effects_name_hacks = { 'hypervitaminosis' : 'Hypervitaminosis', 'toxin_buildup' : 'Toxin Buildup', 'bad_food_ennui' : 'Gross food', 'hypovitA' : 'Night blindness', 'anemia' : 'Anemia', 'scurvy' : 'Scurvy', 'scurvy' : 'Scurvy'}
+
 def monster_name(x): #checks if the id x is in the monster_name_hack list, and if it is it returns the correct hack name. If it isn't it returns the ID.
     if(x in monster_name_hacks):
         return monster_name_hacks[x]
@@ -18,8 +20,20 @@ def trait_name(x): #checks if the id x is in the trait_name_hack list, and if it
     else:
         return x
 
-def bionics_name(x): #checks if the id x is in the trait_name_hack list, and if it is it returns the correct hack name. If it isn't it returns the ID.
+def bionics_name(x): #checks if the id x is in the bionics_name_hack list, and if it is it returns the correct hack name. If it isn't it returns the ID.
     if(x in bionics_name_hacks):
         return bionics_name_hacks[x]
+    else:
+        return x
+
+def has_effects_name(x): #checks if the id x is in the effects_name_hack list, and if it is it returns true, else false.
+    if(x in effects_name_hacks):
+        return True
+    else:
+        return False
+
+def effects_name(x): #checks if the id x is in the effects_name_hack list, and if it is it returns the correct hack name. If it isn't it returns the ID.
+    if(x in effects_name_hacks):
+        return effects_name_hacks[x]
     else:
         return x

@@ -93,6 +93,7 @@ The following scripts simply use pywikibot to upload content to the pages automa
 - speciestoname.py -> Template:Speciestoname
 - speciesangers.py -> Template:Speciesangers
 - speciesfears.py -> Template:Speciesfears
+- vitamins.py -> Template:Vitaminslist
 - vitaminstoname.py -> Template:Vitaminstoname
 
 # Troubleshooting
