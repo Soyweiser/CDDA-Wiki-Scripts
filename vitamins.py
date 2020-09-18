@@ -63,7 +63,7 @@ def generatePage (): #generates all the vitamins page, by looping over all the v
             if ("max" in data[it]):
                 output.extend(", ")
                 output.extend(str(data[it]["max"]))
-            output.extend(" )\n| ")
+            output.extend(")\n| ")
             output.extend(str(data[it]["rate"]))
             output.extend("\n| ")
             if ("excess" in data[it]):

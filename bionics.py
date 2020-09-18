@@ -22,7 +22,7 @@ with open('data/json/bionics.json') as data_file:
 with open('data/json/items/bionics.json') as data_file:
     data1 = json.load(data_file)
 
-with open('data/json/mutations.json') as data_file:
+with open('data/json/mutations/mutations.json') as data_file:
     mutation_data = json.load(data_file)
 
 with open('data/json/items/obsolete.json') as data_file:
