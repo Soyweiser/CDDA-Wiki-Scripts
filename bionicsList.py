@@ -3,6 +3,7 @@ import sys
 import string
 import pywikibot
 from version import version
+from cddaWiki import GetName
 
 #Data is automatically copied to the wiki template pages.
 #Usage: python [location of pywikibotinstall]\pwb.py bionicsList.py
@@ -35,11 +36,11 @@ for iterator in range(0, len(data)):
     if(not ignore):
         if('flags' in data[iterator]):
             if('BIONIC_FAULTY' in data[iterator]['flags']): #only add bionics that are not faulty to this list.
-                ID_bionic_faulty.append(data[iterator]["name"])
+                ID_bionic_faulty.append(GetName(data[iterator]["name"]))
             else:
-                ID_bionic.append(data[iterator]["name"])
+                ID_bionic.append(GetName(data[iterator]["name"]))
         else:
-            ID_bionic.append(data[iterator]["name"])
+            ID_bionic.append(GetName(data[iterator]["name"]))
 
 for iterator in range(0, len(data1)): #the previous loop does not add some cbms, this loop will add the missing ones.
     ignore = False
@@ -53,7 +54,7 @@ for iterator in range(0, len(data1)): #the previous loop does not add some cbms,
                 excluded = False
                 break
         if(excluded):
-            ID_bionic.append(data1[iterator]["name"])
+            ID_bionic.append(GetName(data1[iterator]["name"]))
 
 ID_bionic = sorted(ID_bionic, key=string.lower) 
 ID_bionic_faulty = sorted(ID_bionic_faulty, key=string.lower) 
