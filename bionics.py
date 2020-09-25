@@ -4,6 +4,7 @@ import pywikibot
 from version import version
 from name_hacks import trait_name
 from name_hacks import bionics_name
+from cddaWiki import GetName
 from pprint import pprint
 from Tkinter import Tk
 root = Tk()
@@ -32,7 +33,7 @@ ID_mut = dict()
 for iterator in range(0, len(mutation_data)):
     keyD = dict()
     keyD['id_nr'] = iterator
-    keyD["name"] = mutation_data[iterator]["name"]
+    keyD["name"] = GetName(mutation_data[iterator]["name"])
     ID_mut[mutation_data[iterator]["id"]] = keyD
 
 def MUT_ID_To_String(id):
@@ -54,14 +55,14 @@ ID_bionic = dict()
 for iterator in range(0, len(data)):
     keyD = dict()
     keyD['id_nr'] = iterator
-    keyD["name"] = data[iterator]["name"]
+    keyD["name"] = GetName(data[iterator]["name"])
     ID_bionic[data[iterator]["id"]] = keyD
 
 ID_bio_item = dict()
 for iterator in range(0, len(data1)):
     keyD = dict()
     keyD['id_nr'] = iterator
-    keyD["name"] = data1[iterator]["name"]
+    keyD["name"] = GetName((data1[iterator]["name"])
     if ('id' in data1[iterator]):
         ID_bio_item[data1[iterator]["id"]] = keyD
     else:
@@ -115,7 +116,7 @@ def bionicPageName (var): #depending on if the bionic has a bionic item or not, 
         if( not "abstract" in data1[item_id] ):
             retval = ID_To_String(data1[item_id]['id'])
     else: #bionic doesn't have an item. Which probably means it is a faulty bionic.
-        retval = data[var]['name']
+        retval = GetName(data[var]['name'])
     return retval
 
 def generatePage (var): #generates all the data which should be in one of the wiki pages. var is the position of the bionic in the data master list of bionics. Returns empty string if the bionic is obsolete.
@@ -132,7 +133,7 @@ def generatePage (var): #generates all the data which should be in one of the wi
 --><noinclude>{{Infobox/Bionics</noinclude>
 <includeonly>{{Row/Bionics</includeonly>
 |name=""" )
-                output.append(data1[item_id]['name'])
+                output.append(GetName(data1[item_id]['name']))
                 output.append("\n|id=")
                 output.append(data1[item_id]['id'])
                 output.append("\n|b_id=")
@@ -206,11 +207,11 @@ def generatePage (var): #generates all the data which should be in one of the wi
 --><noinclude>{{Infobox/Bionics</noinclude>
 <includeonly>{{Row/Bionics</includeonly>
 |name=""" )
-            output.append(data[var]['name'])
+            output.append(GetName(data[var]['name']))
             output.append("\n|b_id=")
             output.append(str(data[var]['id']))
             output.append("\n|b_name=")
-            output.append(data[var]['name'])
+            output.append(GetName(data[var]['name']))
             if('capacity' in data[var]):
                 output.append("\n|capacity=")
                 output.append(str(data[var]['capacity']))
